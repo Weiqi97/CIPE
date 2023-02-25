@@ -1,10 +1,15 @@
 #include "field.h"
 
 int test_zp_zero() {
-    zp x, y;
+    zp x;
     zp_zero(x);
-    fp_zero(y);
-    return fp_cmp(x, y);
+    return zp_is_int(x, 0);
+}
+
+int test_zp_one() {
+    zp x;
+    zp_one(x);
+    return zp_is_int(x, 1);
 }
 
 int test_zp_copy() {
@@ -51,7 +56,8 @@ int main() {
     pc_param_set_any();
 
     // Perform tests.
-    if (test_zp_zero() != RLC_EQ) return 1;
+    if (test_zp_zero() != 1) return 1;
+    if (test_zp_one() != 1) return 1;
     if (test_zp_copy() != RLC_EQ) return 1;
     if (test_zp_from_int() != RLC_EQ) return 1;
     if (test_zp_add() != RLC_EQ) return 1;

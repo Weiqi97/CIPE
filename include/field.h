@@ -9,6 +9,8 @@ void rand_zp(zp x);
 
 void zp_zero(zp x);
 
+void zp_one(zp x);
+
 void zp_copy(zp x_copy, zp x);
 
 void zp_from_int(zp x, int x_int);
@@ -18,5 +20,7 @@ void zp_add(zp r, zp x, zp y);
 void zp_multiply(zp p, zp x, zp y);
 
 void zp_inverse(zp xi, zp x);
+
+int zp_is_int(zp x, int x_int);
 
 #endif //PPANN_FIELD_H
