@@ -8,8 +8,6 @@ typedef gt_t gt;
 
 void generator(g x);
 
-void negate(g nx, g x);
-
 void multiply(g r, g x, zp y);
 
 void exponentiation(gt r, gt x, zp y);

@@ -4,10 +4,6 @@ void generator(ep_st *x) {
     g1_get_gen(x);
 }
 
-void negate(ep_st *nx, ep_st *x) {
-    g1_neg(nx, x);
-}
-
 void multiply(ep_st *r, ep_st *x, dig_t *y) {
     bn_t new_y;
     fp_prime_back(new_y, y);
