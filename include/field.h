@@ -17,6 +17,8 @@ void zp_from_int(zp x, int x_int);
 
 void zp_add(zp r, zp x, zp y);
 
+void zp_neg(zp nx, zp x);
+
 void zp_multiply(zp p, zp x, zp y);
 
 void zp_inverse(zp xi, zp x);

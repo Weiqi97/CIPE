@@ -16,13 +16,13 @@ int test_zp_copy() {
     zp x, y;
     zp_from_int(x, 3);
     zp_copy(y, x);
-    return fp_cmp_dig(y, 3);
+    return zp_is_int(y, 3);
 }
 
 int test_zp_from_int() {
     zp x;
     zp_from_int(x, 3);
-    return fp_cmp_dig(x, 3);
+    return zp_is_int(x, 3);
 }
 
 int test_zp_add() {
@@ -30,7 +30,15 @@ int test_zp_add() {
     zp_from_int(x, 10);
     zp_from_int(y, 20);
     zp_add(r, x, y);
-    return fp_cmp_dig(r, 30);
+    return zp_is_int(r, 30);
+}
+
+int test_zp_neg() {
+    zp x, y, r;
+    rand_zp(x);
+    zp_neg(y, x);
+    zp_add(r, x, y);
+    return zp_is_int(r, 0);
 }
 
 int test_zp_multiply() {
@@ -38,7 +46,7 @@ int test_zp_multiply() {
     zp_from_int(x, 10);
     zp_from_int(y, 20);
     zp_multiply(r, x, y);
-    return fp_cmp_dig(r, 200);
+    return zp_is_int(r, 200);
 }
 
 int test_zp_inverse() {
@@ -46,7 +54,7 @@ int test_zp_inverse() {
     rand_zp(x);
     zp_inverse(xi, x);
     zp_multiply(r, x, xi);
-    return fp_cmp_dig(r, 1);
+    return zp_is_int(r, 1);
 }
 
 
@@ -58,11 +66,12 @@ int main() {
     // Perform tests.
     if (test_zp_zero() != 1) return 1;
     if (test_zp_one() != 1) return 1;
-    if (test_zp_copy() != RLC_EQ) return 1;
-    if (test_zp_from_int() != RLC_EQ) return 1;
-    if (test_zp_add() != RLC_EQ) return 1;
-    if (test_zp_multiply() != RLC_EQ) return 1;
-    if (test_zp_inverse() != RLC_EQ) return 1;
+    if (test_zp_copy() != 1) return 1;
+    if (test_zp_from_int() != 1) return 1;
+    if (test_zp_add() != 1) return 1;
+    if (test_zp_neg() != 1) return 1;
+    if (test_zp_multiply() != 1) return 1;
+    if (test_zp_inverse() != 1) return 1;
 
     return 0;
 }

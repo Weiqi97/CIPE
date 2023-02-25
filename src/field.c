@@ -24,6 +24,10 @@ void zp_add(dig_t *r, dig_t *x, dig_t *y) {
     fp_add(r, x, y);
 }
 
+void zp_neg(dig_t *nx, dig_t *x) {
+    fp_neg(nx, x);
+}
+
 void zp_multiply(dig_t *p, dig_t *x, dig_t *y) {
     fp_mul(p, x, y);
 }
