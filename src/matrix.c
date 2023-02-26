@@ -70,12 +70,13 @@ zp_mat matrix_merge(zp_mat x, zp_mat y, int row, int col_x, int col_y) {
 }
 
 zp_mat matrix_multiply(zp_mat x, zp_mat y, int row_x, int row_y, int col_y) {
+    zp temp;
     zp_mat xy;
     xy = (zp_mat) malloc(sizeof(zp) * row_x * col_y);
-    zp temp;
+
     for (int i = 0; i < row_x; i++) {
         for (int j = 0; j < col_y; j++) {
-            zp_from_int(xy[i * row_y + j], 0);
+            zp_zero(xy[i * row_y + j]);
             for (int k = 0; k < row_y; k++) {
                 zp_multiply(temp, x[i * row_y + k], y[k * col_y + j]);
                 zp_add(xy[i * col_y + j], xy[i * col_y + j], temp);
@@ -131,10 +132,8 @@ zp_mat matrix_inverse(zp_mat x, int size) {
 
 
     // Copy over the output.
-
     zp_mat xi;
     xi = (zp_mat) malloc(sizeof(zp) * size * size);
-
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
             zp_copy(xi[i * size + j], row_echelon[i * 2 * size + size + j]);

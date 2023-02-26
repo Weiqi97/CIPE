@@ -29,7 +29,7 @@ zp_vec vector_add(zp_vec a, zp_vec b, int size) {
     return r;
 }
 
-g_vec vector_raise(ep_st base[1], zp_vec x, int size) {
+g_vec vector_raise(g base, zp_vec x, int size) {
     g_vec r;
     r = (g_vec) malloc(sizeof(g) * size);
     for (int i = 0; i < size; i++) multiply(r[i], base, x[i]);
