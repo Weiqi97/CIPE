@@ -61,6 +61,10 @@
 //    // Init core and setup.
 //    core_init();
 //    pc_param_set_any();
+
+//// Get order.
+//bn_t N;
+//pc_get_ord(N);
 //
 //    // Perform tests.
 //    if (test_zp_from_int() != 1) return 1;

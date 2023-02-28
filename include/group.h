@@ -1,17 +1,17 @@
-//#ifndef PPANN_GROUP_H
-//#define PPANN_GROUP_H
-//
-//#include "field.h"
-//
-//typedef g1_t g;
-//typedef gt_t gt;
-//
-//void generator(g x);
-//
-//void multiply(g r, g x, zp y);
-//
-//void exponentiation(gt r, gt x, zp y);
-//
-//void map(g a, g b, gt r);
-//
-//#endif //PPANN_GROUP_H
+#ifndef PPANN_GROUP_H
+#define PPANN_GROUP_H
+
+#include "field.h"
+
+typedef g1_t g;
+typedef gt_t gt;
+
+void gen(g x);
+
+void g_mul(g r, g x, struct zp y);
+
+void gt_raise(gt r, gt x, struct zp y);
+
+void bp_map(g a, g b, gt r);
+
+#endif //PPANN_GROUP_H

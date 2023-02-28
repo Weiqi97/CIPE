@@ -12,7 +12,6 @@ if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(CTest)
 endif()
 
-
 find_library(RELIC_LIB relic)
 
 add_subdirectory(src)
