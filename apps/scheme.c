@@ -20,8 +20,8 @@ struct ct {
 
 void initialize_relic() {
     core_init();
-    fp_prime_init();
     pc_param_set_any();
+
 }
 
 struct key setup(int size) {
@@ -69,25 +69,6 @@ struct ct enc(struct key key, int *message, int size) {
     zp_vec sxATsAAT10_Bi = matrix_multiply(sxATsAAT10, key.Bi, 1, B_SIZE, B_SIZE);
     ct.ctk = vector_raise(key.base, sxATsAAT10_Bi, B_SIZE);
 
-    // Testing.
-    int temp[] = {1, 1, 1, 1, 1, 1};
-    zp_vec temp_zp = vector_zp_from_int(temp, B_SIZE);
-    zp_vec vec_1 = matrix_multiply(temp_zp, key.B, 1, B_SIZE, B_SIZE);
-    zp_vec vec_2 = matrix_multiply(temp_zp, key.Bi, 1, B_SIZE, B_SIZE);
-
-    g_vec vec_11 = vector_raise(key.base, vec_1, B_SIZE);
-    g_vec vec_22 = vector_raise(key.base, vec_2, B_SIZE);
-
-    gt z;
-    pc_map_sim(z, vec_11, vec_22, B_SIZE);
-
-    // Check correctness.
-    gt desired_output;
-    gt_exp_dig(desired_output, key.t_base, 6);
-
-    if (gt_cmp(desired_output, z) == RLC_EQ) printf("Magic happened.");
-    else printf("Fuck my life.");
-
     return ct;
 }
 
@@ -112,12 +93,26 @@ void eval(struct key key, struct ct x, struct ct y, int size) {
 int main() {
     initialize_relic();
 
-    int x[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-
+//    int x[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     struct key key = setup(10);
-
-    struct ct ct_x = enc(key, x, 10);
-
+//    struct ct ct_x = enc(key, x, 10);
 //    eval(key, ct_x, ct_x, 10);
+
+    bn_t a, b, c, n;
+    pc_get_ord(n);
+
+    bn_rand_mod(a, n);
+    bn_rand_mod(b, n);
+    bn_mul(c, a, a);
+    bn_mod(c, c, n);
+
+    g g1, g2;
+    g1_mul(g1, key.base, a);
+    g1_mul(g2, key.base, b);
+
+    gt gt1, gt2;pc_map(gt1, g1, g2);
+    gt_exp(gt2, key.t_base, c);
+
+    printf("Works if 1: %i", gt_cmp(gt1, gt2) == RLC_EQ);
     return 0;
 }

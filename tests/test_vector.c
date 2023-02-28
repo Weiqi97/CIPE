@@ -27,6 +27,18 @@ int test_add_vector() {
     return zp_is_int(z[2], 36);
 }
 
+int test_zp_inner_product() {
+    zp_vec x, y;
+    int int_vec_x[3] = {1, 2, 3};
+    int int_vec_y[3] = {11, 22, 33};
+    x = vector_zp_from_int(int_vec_x, 3);
+    y = vector_zp_from_int(int_vec_y, 3);
+
+    zp r;
+    zp_inner_product(r, x, y, 3);
+    return zp_is_int(r, 154);
+}
+
 int test_inner_product() {
     zp_vec x, y;
     int int_vec_x[3] = {1, 2, 3};
@@ -58,6 +70,7 @@ int main() {
     if (test_zp_from_int() != 1) return 1;
     if (test_merge_vector() != 1) return 1;
     if (test_add_vector() != 1) return 1;
+    if (test_zp_inner_product() != 1) return 1;
     if (test_inner_product() != RLC_EQ) return 1;
 
     return 0;

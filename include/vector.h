@@ -15,6 +15,8 @@ zp_vec vector_merge(zp_vec a, zp_vec b, int size_a, int size_b);
 
 zp_vec vector_add(zp_vec a, zp_vec b, int size);
 
+void zp_inner_product(zp r, zp_vec a, zp_vec b, int size);
+
 g_vec vector_raise(g base, zp_vec x, int size);
 
 void inner_product(gt r, g_vec a, g_vec b, int size);
