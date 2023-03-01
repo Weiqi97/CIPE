@@ -72,21 +72,20 @@ struct ct enc(struct key key, const int *message, int size) {
 }
 
 void eval(struct key key, struct ct x, struct ct y, int size) {
-    //
-    gt z, xy, ct;
+    // Decrypt components.
+    gt xy, ct;
     inner_product(xy, x.ctx, y.ctx, size);
     inner_product(ct, x.ctc, y.ctk, B_SIZE);
 
-    // Decrypt.
+    // Decrypt final result.
     gt_inv(ct, ct);
-    gt_mul(z, xy, ct);
+    gt_mul(xy, xy, ct);
 
-    // Check correctness.
-    gt desired_output;
-    gt_exp_dig(desired_output, key.t_base, 55);
-
-    if (gt_cmp(desired_output, z) == RLC_EQ) printf("Magic happened.");
-    else printf("Fuck my life.");
+//    // Check correctness.
+//    gt desired_output;
+//    gt_exp_dig(desired_output, key.t_base, 55);
+//
+//    if (gt_cmp(desired_output, xy) == RLC_EQ) printf("Magic happened");
 }
 
 int main() {
@@ -102,6 +101,5 @@ int main() {
     struct ct ct_y = enc(key, y, 10);
     // Evaluate the two ciphertexts.
     eval(key, ct_x, ct_y, 10);
-
     return 0;
 }
