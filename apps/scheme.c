@@ -81,18 +81,17 @@ void eval(struct key key, struct ct x, struct ct y, int size) {
     gt_inv(ct, ct);
     gt_mul(xy, xy, ct);
 
-//    // Check correctness.
-//    gt desired_output;
-//    gt_exp_dig(desired_output, key.t_base, 55);
-//
-//    if (gt_cmp(desired_output, xy) == RLC_EQ) printf("Magic happened");
+    // Check correctness.
+    gt desired_output;
+    gt_exp_dig(desired_output, key.t_base, 65);
+    if (gt_cmp(desired_output, xy) == RLC_EQ) printf("Magic happened");
 }
 
 int main() {
     // Initialize relic.
     initialize_relic();
     // Set x, y vectors.
-    int x[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    int x[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 2};
     int y[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     // Initialize the scheme.
     struct key key = setup(10);
