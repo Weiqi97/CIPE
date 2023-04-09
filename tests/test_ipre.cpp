@@ -2,17 +2,17 @@
 
 int test_scheme() {
     // Set x, y vectors.
-    int x[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 2};
-    int y[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int x[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    int y[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 1000};
     // Initialize the scheme.
     key key = setup(10);
     // Encrypt the messages.
     ct ct_x = enc(key, x, 10);
     ct ct_y = enc(key, y, 10);
     // Evaluate the two ciphertexts.
-    int output = eval(key, ct_x, ct_y, 10, 100);
+    int output = eval(key, ct_x, ct_y, 10, 5000);
 
-    return output == 65;
+    return output == 1045;
 }
 
 int main() {

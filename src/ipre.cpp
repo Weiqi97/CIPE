@@ -58,7 +58,7 @@ int eval(key key, ct x, ct y, int size, int bound) {
     gt_inv(ct, ct);
     gt_mul(xy, xy, ct);
 
-    // Get a G_t element holder.
+    // Get a target group element holder.
     gt output;
 
     // Iterate through a loop to find correct answer.
