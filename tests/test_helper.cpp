@@ -1,5 +1,8 @@
 #include "helper.h"
 
+#include "iostream"
+using namespace std;
+
 int test_read_fvecs() {
     // Set dimensions holders and get the data.
     size_t d, n;
@@ -30,8 +33,30 @@ int test_read_ivecs() {
     return 1;
 }
 
+int test_encrypt() {
+    // Set dimensions holders and get the data.
+    size_t d, n;
+    float *xd = fvecs_read("sift_query.fvecs", &d, &n);
+
+    cout << static_cast<int>(xd[1]) << endl;
+    //
+    int d_int, n_int;
+    d_int = static_cast<int>(d);
+    n_int = static_cast<int>(n);
+
+    //
+//    Key key = setup(d_int);
+//    Ct *encrypted_data = encrypt_data(gt, key, d_int, 1);
+    return 1;
+}
+
 int main() {
-    if (test_read_fvecs() != 1) return 1;
-    if (test_read_ivecs() != 1) return 1;
+    // Init core and setup.
+    core_init();
+    pc_param_set_any();
+
+//    if (test_read_fvecs() != 1) return 1;
+//    if (test_read_ivecs() != 1) return 1;
+    if (test_encrypt() != 1) return 1;
     return 0;
 }

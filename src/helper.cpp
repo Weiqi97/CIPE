@@ -38,3 +38,11 @@ int *ivecs_read(const char *file_path, size_t *d_out, size_t *n_out) {
     // Cast the float results to integers.
     return (int *) fvecs_read(file_path, d_out, n_out);
 }
+
+Ct *encrypt_data(int *data, Key key, int d, int n) {
+    auto *encrypted_data = new Ct[n];
+
+    for (int i = 0; i < n; i++) encrypted_data[i] = enc(key, &data[i * d], d);
+
+    return encrypted_data;
+}
