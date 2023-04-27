@@ -59,10 +59,10 @@ int test_encrypt() {
 
     // Encrypt the first two vectors.
     Key key = setup(d_int);
-    Ct *encrypted_data = encrypt_data(data, key, d, 2);
+    Item *encrypted_data = encrypt_data(data, key, d, 2);
 
     // Get inner product of the first two vectors.
-    int result = eval(key, encrypted_data[0], encrypted_data[1], d_int, 200000);
+    int result = eval(key, encrypted_data[0].value, encrypted_data[1].value, d_int, 200000);
 
     // Check for whether the data is correct.
     if (result != 184094) return 0;

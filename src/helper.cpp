@@ -50,12 +50,12 @@ int *float_to_int(const float *data, size_t size) {
     return int_data;
 }
 
-Ct *encrypt_data(const int *data, Key key, size_t d, size_t n) {
+Item *encrypt_data(const int *data, Key key, size_t d, size_t n) {
     // Get a new list for encrypted data.
-    auto *encrypted_data = new Ct[n];
+    auto *encrypted_data = new Item[n];
 
     // Encrypt each vector.
-    for (int i = 0; i < n; i++) encrypted_data[i] = enc(key, &data[i * d], static_cast<int>(d));
+    for (int i = 0; i < n; i++) encrypted_data[i].value = enc(key, &data[i * d], static_cast<int>(d));
 
     // Return pointer of the list.
     return encrypted_data;

@@ -1,6 +1,5 @@
 #include "hnsw.h"
 
-
 int Item::dist(Item &other, Key key, int size, int bound) const {
     return eval(key, value, other.value, size, bound);
 }
@@ -13,11 +12,11 @@ HNSWGraph::HNSWGraph(int NN, int MN, int MNZ, int SN, int ML, Key key, int size,
 }
 
 void HNSWGraph::insert(Item &q) {
-    int nid = items.size();
+    int nid = static_cast<int>(items.size());
     numItem++;
     items.push_back(q);
     // sample layer
-    int maxLyer = layerEdgeLists.size() - 1;
+    int maxLayer = static_cast<int>(layerEdgeLists.size()) - 1;
     int l = 0;
     uniform_real_distribution<double> distribution(0.0, 1.0);
     while (l < ML && (1.0 / ML <= distribution(generator))) {
@@ -30,8 +29,8 @@ void HNSWGraph::insert(Item &q) {
     }
     // search up layer entrance
     int ep = enterNode;
-    for (int i = maxLyer; i > l; i--) ep = searchLayer(q, ep, 1, i)[0];
-    for (int i = min(l, maxLyer); i >= 0; i--) {
+    for (int i = maxLayer; i > l; i--) ep = searchLayer(q, ep, 1, i)[0];
+    for (int i = min(l, maxLayer); i >= 0; i--) {
         int MM = l == 0 ? MNZ : MN;
         vector<int> neighbors = searchLayer(q, ep, SN, i);
         vector<int> selectedNeighbors = vector<int>(neighbors.begin(),
@@ -53,23 +52,24 @@ void HNSWGraph::insert(Item &q) {
     if (l == layerEdgeLists.size() - 1) enterNode = nid;
 }
 
+vector<int> HNSWGraph::search(Item &q, int K) {
+    int maxLayer = static_cast<int>(layerEdgeLists.size()) - 1;
+    int ep = enterNode;
+    for (auto l = maxLayer; l >= 1; l--) ep = searchLayer(q, ep, 1, l)[0];
+    return searchLayer(q, ep, K, 0);
+}
+
 void HNSWGraph::addEdge(int st, int ed, int lc) {
     if (st == ed) return;
     layerEdgeLists[lc][st].push_back(ed);
     layerEdgeLists[lc][ed].push_back(st);
 }
 
-vector<int> HNSWGraph::search(Item &q, int K) {
-    auto maxLyer = layerEdgeLists.size() - 1;
-    int ep = enterNode;
-    for (auto l = maxLyer; l >= 1; l--) ep = searchLayer(q, ep, 1, l)[0];
-    return searchLayer(q, ep, K, 0);
-}
-
 vector<int> HNSWGraph::searchLayer(Item &q, int ep, int ef, int lc) {
+    unordered_set<int> isVisited;
     set<pair<double, int>> candidates;
     set<pair<double, int>> nearestNeighbors;
-    unordered_set<int> isVisited;
+
 
     double td = q.dist(items[ep], key, size, bound);
     candidates.insert(make_pair(td, ep));
