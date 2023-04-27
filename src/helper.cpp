@@ -39,10 +39,24 @@ int *ivecs_read(const char *file_path, size_t *d_out, size_t *n_out) {
     return (int *) fvecs_read(file_path, d_out, n_out);
 }
 
-Ct *encrypt_data(int *data, Key key, int d, int n) {
+int *float_to_int(const float *data, size_t size) {
+    // Get a new list for integer data.
+    auto int_data = new int[size];
+
+    // Cast float to integers.
+    for (int i = 0; i < size; i++) int_data[i] = static_cast<int>(data[i]);
+
+    // Return pointer of the list.
+    return int_data;
+}
+
+Ct *encrypt_data(const int *data, Key key, size_t d, size_t n) {
+    // Get a new list for encrypted data.
     auto *encrypted_data = new Ct[n];
 
-    for (int i = 0; i < n; i++) encrypted_data[i] = enc(key, &data[i * d], d);
+    // Encrypt each vector.
+    for (int i = 0; i < n; i++) encrypted_data[i] = enc(key, &data[i * d], static_cast<int>(d));
 
+    // Return pointer of the list.
     return encrypted_data;
 }
