@@ -50,7 +50,7 @@ Ct enc(Key key, const int *message, int size) {
 
 int eval(Key key, Ct x, Ct y, int size, int bound) {
     // Decrypt components.
-    gt xy, ct;
+    gt_sym xy, ct;
     inner_product(xy, x.ctx, y.ctx, size);
     inner_product(ct, x.ctc, y.ctk, B_SIZE);
 
@@ -59,7 +59,7 @@ int eval(Key key, Ct x, Ct y, int size, int bound) {
     gt_mul(xy, xy, ct);
 
     // Get a target group element holder.
-    gt output;
+    gt_sym output;
 
     // Iterate through a loop to find correct answer.
     for (int i = 1; i <= bound; i++) {

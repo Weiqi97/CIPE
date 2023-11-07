@@ -29,15 +29,15 @@ zp_vec vector_add(zp_vec a, zp_vec b, int size) {
     return r;
 }
 
-g_vec vector_raise(g base, zp_vec x, int size) {
+g_vec vector_raise(g_sym base, zp_vec x, int size) {
     g_vec r;
-    r = (g_vec) malloc(sizeof(g) * size);
+    r = (g_vec) malloc(sizeof(g_sym) * size);
     for (int i = 0; i < size; i++) g_mul(r[i], base, x[i]);
     return r;
 }
 
-void inner_product(gt r, g_vec a, g_vec b, int size) {
-    gt temp;
+void inner_product(gt_sym r, g_vec a, g_vec b, int size) {
+    gt_sym temp;
     gt_set_unity(r);
     for (int i = 0; i < size; i++) { pc_map(temp, a[i], b[i]);
         gt_mul(r, r, temp);

@@ -10,8 +10,8 @@ struct Key {
     zp_mat A;
     zp_mat B;
     zp_mat Bi;
-    g base;
-    gt t_base;
+    g_sym base;
+    gt_sym t_base;
     bn_t modular;
 };
 

@@ -30,13 +30,13 @@ int test_inner_product(bn_st *N) {
     zp_vec x = vector_zp_from_int(int_vec_x, 3, N);
     zp_vec y = vector_zp_from_int(int_vec_y, 3, N);
 
-    g base;
+    g_sym base;
     g_vec gx, gy;
     gen(base);
     gx = vector_raise(base, x, 3);
     gy = vector_raise(base, y, 3);
 
-    gt b, r;
+    gt_sym b, r;
     inner_product(r, gx, gy, 3);
     bp_map(base, base, b);
     gt_exp_dig(b, b, 32);

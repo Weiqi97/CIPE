@@ -2,7 +2,6 @@
 #define PPANN_MATRIX_H
 
 #include "field.h"
-#include "group.h"
 
 typedef ZP *zp_mat;
 

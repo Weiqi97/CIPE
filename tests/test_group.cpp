@@ -1,7 +1,7 @@
 #include "group.h"
 
 int test_generator() {
-    g x;
+    g_sym x;
     gen(x);
     return g1_is_valid(x);
 }
@@ -12,21 +12,21 @@ int test_all(bn_st *N) {
     ZP n = zp_from_int(25, N);
 
     // Declare variables.
-    g a, b;
-    gt x, y, z;
+    g_sym a, b;
+    gt_sym x, y, z;
 
-    // Get generator g and find g^5.
+    // Get generator g_sym and find g_sym^5.
     gen(a);
     g_mul(b, a, m);
 
-    // Get e(g, g) and e(g^5, g^5).
+    // Get e(g_sym, g_sym) and e(g_sym^5, g_sym^5).
     bp_map(a, a, x);
     bp_map(b, b, y);
 
-    // Get e(g, g)^25.
+    // Get e(g_sym, g_sym)^25.
     gt_raise(z, x, n);
 
-    // Compare e(g^5, g^5) with e(g, g)^25.
+    // Compare e(g_sym^5, g_sym^5) with e(g_sym, g_sym)^25.
     return gt_cmp(y, z);
 }
 
