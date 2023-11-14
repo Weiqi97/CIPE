@@ -1,8 +1,8 @@
 #ifndef PPANN_IPRE_H
 #define PPANN_IPRE_H
 
-#include "vector.h"
-#include "matrix.h"
+#include "sym_vector.h"
+#include "sym_matrix.h"
 
 const int B_SIZE = 6;
 

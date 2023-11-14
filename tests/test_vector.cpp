@@ -1,4 +1,4 @@
-#include "vector.h"
+#include "sym_vector.h"
 
 int test_zp_from_int(bn_st *N) {
     int int_vec[4] = {1, 2, 3, 4};

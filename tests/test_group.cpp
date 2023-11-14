@@ -1,4 +1,4 @@
-#include "group.h"
+#include "sym_group.h"
 
 int test_generator() {
     g_sym x;
@@ -8,8 +8,8 @@ int test_generator() {
 
 int test_all(bn_st *N) {
     // Set integers.
-    ZP m = zp_from_int(5, N);
-    ZP n = zp_from_int(25, N);
+    ZP_SYM m = zp_from_int(5, N);
+    ZP_SYM n = zp_from_int(25, N);
 
     // Declare variables.
     g_sym a, b;

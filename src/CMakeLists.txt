@@ -2,7 +2,12 @@
 set(HEADER_LIST "${CMAKE_SOURCE_DIR}/include/")
 
 # Add all files to the library.
-add_library(ppann_lib field.cpp group.cpp vector.cpp matrix.cpp ipre.cpp hnsw.cpp helper.cpp ${HEADER_LIST})
+add_library(ppann_lib
+        sym_field.cpp sym_group.cpp sym_vector.cpp sym_matrix.cpp
+        asym_field.cpp asym_group.cpp
+        ipre.cpp hnsw.cpp helper.cpp
+        ${HEADER_LIST}
+)
 
 # We need this directory, and users of our library will need it too
 target_include_directories(ppann_lib PUBLIC ../include)

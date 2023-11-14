@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:23.10
 
 # Update libraries.
 RUN apt update && apt upgrade -y
@@ -6,6 +6,8 @@ RUN apt update && apt upgrade -y
 RUN apt install -y wget unzip build-essential libgmp-dev libssl-dev cmake
 # Clean up.
 RUN apt clean
+
+RUN cmake --version
 
 # Work in the home directory.
 WORKDIR "/home"

@@ -12,7 +12,7 @@ Key setup(int size) {
 }
 
 Ct enc(Key key, const int *message, int size) {
-    // Declare the returned ciphertext and convert message to ZP.
+    // Declare the returned ciphertext and convert message to ZP_ASYM.
     Ct ct{};
     zp_vec x = vector_zp_from_int(message, size, key.modular);
 

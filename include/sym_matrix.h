@@ -1,9 +1,9 @@
-#ifndef PPANN_MATRIX_H
-#define PPANN_MATRIX_H
+#ifndef PPANN_SYM_MATRIX_H
+#define PPANN_SYM_MATRIX_H
 
-#include "field.h"
+#include "sym_field.h"
 
-typedef ZP *zp_mat;
+typedef ZP_SYM *zp_mat;
 
 zp_mat matrix_zp_from_int(const int *int_mat, int row, int col, bn_t modular);
 
@@ -21,4 +21,4 @@ zp_mat matrix_multiply(zp_mat x, zp_mat y, int row_x, int row_y, int col_y, bn_t
 
 zp_mat matrix_inverse(zp_mat x, int size, bn_t modular);
 
-#endif //PPANN_MATRIX_H
+#endif //PPANN_SYM_MATRIX_H

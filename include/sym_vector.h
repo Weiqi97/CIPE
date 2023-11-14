@@ -1,10 +1,10 @@
-#ifndef PPANN_VECTOR_H
-#define PPANN_VECTOR_H
+#ifndef PPANN_SYM_VECTOR_H
+#define PPANN_SYM_VECTOR_H
 
-#include "field.h"
-#include "group.h"
+#include "sym_field.h"
+#include "sym_group.h"
 
-typedef ZP *zp_vec;
+typedef ZP_SYM *zp_vec;
 typedef g_sym *g_vec;
 
 zp_vec vector_zp_from_int(const int *int_vec, int size, bn_t modular);
@@ -19,4 +19,4 @@ g_vec vector_raise(g_sym base, zp_vec x, int size);
 
 void inner_product(gt_sym r, g_vec a, g_vec b, int size);
 
-#endif //PPANN_VECTOR_H
+#endif //PPANN_SYM_VECTOR_H

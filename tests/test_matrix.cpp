@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include "sym_matrix.h"
 
 int test_zp_from_int(bn_st *N) {
     int int_mat[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
