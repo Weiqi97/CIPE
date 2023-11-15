@@ -1,5 +1,4 @@
-#ifndef PPANN_ASYM_FIELD_H
-#define PPANN_ASYM_FIELD_H
+#pragma once
 
 #include <gmp.h>
 
@@ -33,5 +32,3 @@ ZP_ASYM zp_inv(ZP_ASYM x);
 int zp_cmp(ZP_ASYM x, ZP_ASYM y);
 
 int zp_cmp_int(ZP_ASYM x, int y);
-
-#endif //PPANN_ASYM_FIELD_H

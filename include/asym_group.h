@@ -1,5 +1,4 @@
-#ifndef PPANN_ASYM_GROUP_H
-#define PPANN_ASYM_GROUP_H
+#pragma once
 
 #include "asym_field.h"
 
@@ -18,5 +17,3 @@ void g2_mul(g2_asym r, g2_asym x, ZP_ASYM y);
 void gt_raise(gt_asym r, gt_asym x, ZP_ASYM y);
 
 void bp_map(gt_asym r, g1_asym x, g2_asym y);
-
-#endif //PPANN_ASYM_GROUP_H

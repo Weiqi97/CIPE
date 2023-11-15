@@ -22,7 +22,7 @@ RUN mkdir -p relic-target-sym
 WORKDIR "/home/relic-0.6.0/relic-target-sym"
 RUN cmake -DLABEL=sym ..
 RUN ../preset/gmp-pbc-ss1536.sh ../
-RUN make -w
+RUN make
 RUN make install
 
 # Library installation, install the asymmetric curve.
@@ -31,7 +31,7 @@ RUN mkdir -p relic-target-asym
 WORKDIR "/home/relic-0.6.0/relic-target-asym"
 RUN cmake -DLABEL=asym ..
 RUN ../preset/gmp-pbc-bn254.sh ../
-RUN make -w
+RUN make
 RUN make install
 
 # Copy the files over to working directory.

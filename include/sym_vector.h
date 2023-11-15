@@ -1,5 +1,4 @@
-#ifndef PPANN_SYM_VECTOR_H
-#define PPANN_SYM_VECTOR_H
+#pragma once
 
 #include "sym_field.h"
 #include "sym_group.h"
@@ -18,5 +17,3 @@ zp_vec vector_add(zp_vec a, zp_vec b, int size);
 g_vec vector_raise(g_sym base, zp_vec x, int size);
 
 void inner_product(gt_sym r, g_vec a, g_vec b, int size);
-
-#endif //PPANN_SYM_VECTOR_H

@@ -1,5 +1,4 @@
-#ifndef PPANN_SYM_FIELD_H
-#define PPANN_SYM_FIELD_H
+#pragma once
 
 #include <gmp.h>
 
@@ -33,5 +32,3 @@ ZP_SYM zp_inv(ZP_SYM x);
 int zp_cmp(ZP_SYM x, ZP_SYM y);
 
 int zp_cmp_int(ZP_SYM x, int y);
-
-#endif //PPANN_SYM_FIELD_H

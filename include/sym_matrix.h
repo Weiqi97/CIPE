@@ -1,5 +1,4 @@
-#ifndef PPANN_SYM_MATRIX_H
-#define PPANN_SYM_MATRIX_H
+#pragma once
 
 #include "sym_field.h"
 
@@ -20,5 +19,3 @@ zp_mat matrix_merge(zp_mat x, zp_mat y, int row, int col_x, int col_y);
 zp_mat matrix_multiply(zp_mat x, zp_mat y, int row_x, int row_y, int col_y, bn_t modular);
 
 zp_mat matrix_inverse(zp_mat x, int size, bn_t modular);
-
-#endif //PPANN_SYM_MATRIX_H

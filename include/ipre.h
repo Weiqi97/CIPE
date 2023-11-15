@@ -1,5 +1,4 @@
-#ifndef PPANN_IPRE_H
-#define PPANN_IPRE_H
+#pragma once
 
 #include "sym_vector.h"
 #include "sym_matrix.h"
@@ -26,5 +25,3 @@ Key setup(int size);
 Ct enc(Key key, const int *message, int size);
 
 int eval(Key key, Ct x, Ct y, int size, int bound);
-
-#endif //PPANN_IPRE_H
