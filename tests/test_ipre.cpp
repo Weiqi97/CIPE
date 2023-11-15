@@ -1,4 +1,4 @@
-#include "ipre.h"
+#include "ipre.hpp"
 
 int test_scheme() {
     // Set x, y vectors.

@@ -1,23 +1,23 @@
 #pragma once
 
-#include "sym_vector.h"
-#include "sym_matrix.h"
+#include "sym_vector.hpp"
+#include "sym_matrix.hpp"
 
 const int B_SIZE = 6;
 
 struct Key {
-    zp_mat A;
-    zp_mat B;
-    zp_mat Bi;
-    g_sym base;
-    gt_sym t_base;
+    symZpMat A;
+    symZpMat B;
+    symZpMat Bi;
+    symG base;
+    symGt t_base;
     bn_t modular;
 };
 
 struct Ct {
-    g_vec ctx;
-    g_vec ctk;
-    g_vec ctc;
+    symGVec ctx;
+    symGVec ctk;
+    symGVec ctc;
 };
 
 Key setup(int size);

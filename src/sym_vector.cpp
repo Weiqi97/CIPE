@@ -1,45 +1,46 @@
-#include "sym_vector.h"
+#include "sym_vector.hpp"
 
-zp_vec vector_zp_from_int(const int *int_vec, int size, bn_st *modular) {
-    zp_vec x;
-    x = (zp_vec) malloc(sizeof(ZP_SYM) * size);
-    for (int i = 0; i < size; i++) x[i] = zp_from_int(int_vec[i], modular);
+symZpVec sym::vector_zp_from_int(const int *int_vec, int size, symPoint modular) {
+    symZpVec x;
+    x = (symZpVec) malloc(sizeof(symZp) * size);
+    for (int i = 0; i < size; i++) x[i] = sym::zp_from_int(int_vec[i], modular);
     return x;
 }
 
-zp_vec vector_zp_rand(int size, bn_st *modular) {
-    zp_vec x;
-    x = (zp_vec) malloc(sizeof(ZP_SYM) * size);
-    for (int i = 0; i < size; i++) x[i] = rand_zp(modular);
+symZpVec sym::vector_zp_rand(int size, symPoint modular) {
+    symZpVec x;
+    x = (symZpVec) malloc(sizeof(symZp) * size);
+    for (int i = 0; i < size; i++) x[i] = sym::zp_rand(modular);
     return x;
 }
 
-zp_vec vector_merge(zp_vec a, zp_vec b, int size_a, int size_b) {
-    zp_vec r;
-    r = (zp_vec) malloc(sizeof(ZP_SYM) * (size_a + size_b));
-    for (int i = 0; i < size_a; i++) r[i] = zp_copy(a[i]);
-    for (int i = 0; i < size_b; i++) r[i + size_a] = zp_copy(b[i]);
+symZpVec sym::vector_merge(symZpVec a, symZpVec b, int size_a, int size_b) {
+    symZpVec r;
+    r = (symZpVec) malloc(sizeof(symZp) * (size_a + size_b));
+    for (int i = 0; i < size_a; i++) r[i] = sym::zp_copy(a[i]);
+    for (int i = 0; i < size_b; i++) r[i + size_a] = sym::zp_copy(b[i]);
     return r;
 }
 
-zp_vec vector_add(zp_vec a, zp_vec b, int size) {
-    zp_vec r;
-    r = (zp_vec) malloc(sizeof(ZP_SYM) * size);
-    for (int i = 0; i < size; i++) r[i] = zp_add(a[i], b[i]);
+symZpVec sym::vector_add(symZpVec a, symZpVec b, int size) {
+    symZpVec r;
+    r = (symZpVec) malloc(sizeof(symZp) * size);
+    for (int i = 0; i < size; i++) r[i] = sym::zp_add(a[i], b[i]);
     return r;
 }
 
-g_vec vector_raise(g_sym base, zp_vec x, int size) {
-    g_vec r;
-    r = (g_vec) malloc(sizeof(g_sym) * size);
-    for (int i = 0; i < size; i++) g_mul(r[i], base, x[i]);
+symGVec sym::vector_raise(symG base, symZpVec x, int size) {
+    symGVec r;
+    r = (symGVec) malloc(sizeof(symG) * size);
+    for (int i = 0; i < size; i++) sym::g_mul(r[i], base, x[i]);
     return r;
 }
 
-void inner_product(gt_sym r, g_vec a, g_vec b, int size) {
-    gt_sym temp;
+void sym::inner_product(symGt r, symGVec a, symGVec b, int size) {
+    symGt temp;
     gt_set_unity(r);
-    for (int i = 0; i < size; i++) { pc_map(temp, a[i], b[i]);
+    for (int i = 0; i < size; i++) {
+        pc_map(temp, a[i], b[i]);
         gt_mul(r, r, temp);
     }
 }

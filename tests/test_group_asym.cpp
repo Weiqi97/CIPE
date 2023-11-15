@@ -21,7 +21,7 @@
 //    g1_mul(k, j, test);
 //
 //
-//    // Compare e(g_sym^5, g_sym^5) with e(g_sym, g_sym)^25.
+//    // Compare e(symG^5, symG^5) with e(symG, symG)^25.
 //    return RLC_EQ;
 //}
 
