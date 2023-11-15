@@ -1,26 +1,26 @@
-#include "asym_group.h"
+#include "asym_group.hpp"
 
-void g1_gen(asym_ep_st *x) {
+void asym::g1_gen(asymG1 x) {
     g1_get_gen(x);
 }
 
-void g2_gen(asym_ep2_st *x) {
+void asym::g2_gen(asymG2 x) {
     g2_get_gen(x);
 }
 
-void g1_mul(asym_ep_st *r, asym_ep_st *x, ZP_ASYM y) {
+void asym::g1_mul(asymG1 r, asymG1 x, asymZp y) {
     g1_mul(r, x, y.point);
 }
 
-void g2_mul(asym_ep2_st *r, asym_ep2_st *x, ZP_ASYM y) {
+void asym::g2_mul(asymG2 r, asymG2 x, asymZp y) {
     g2_mul(r, x, y.point);
 }
 
-void gt_raise(asym_fp6_t *r, asym_fp6_t *x, ZP_ASYM y) {
+void asym::gt_raise(asymGt r, asymGt x, asymZp y) {
     gt_exp(r, x, y.point);
 }
 
-void bp_map(asym_fp6_t *r, asym_ep_st *x, asym_ep2_st *y) {
+void asym::bp_map(asymGt r, asymG1 x, asymG2 y) {
     pc_map(r, x, y);
 }
 

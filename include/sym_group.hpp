@@ -12,6 +12,6 @@ namespace sym {
 
     void gt_raise(symGt r, symGt x, symZp y);
 
-    void bp_map(symG a, symG b, symGt r);
+    void bp_map(symGt r, symG a, symG b);
 }
 

@@ -6,7 +6,7 @@ int test_generator() {
     return g1_is_valid(x);
 }
 
-int test_all(bn_st *N) {
+int test_all(symPoint N) {
     // Set integers.
     symZp m = sym::zp_from_int(5, N);
     symZp n = sym::zp_from_int(25, N);
@@ -20,8 +20,8 @@ int test_all(bn_st *N) {
     sym::g_mul(b, a, m);
 
     // Get e(symG, symG) and e(symG^5, symG^5).
-    sym::bp_map(a, a, x);
-    sym::bp_map(b, b, y);
+    sym::bp_map(x, a, a);
+    sym::bp_map(y, b, b);
 
     // Get e(symG, symG)^25.
     sym::gt_raise(z, x, n);

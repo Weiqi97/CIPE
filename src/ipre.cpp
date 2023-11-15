@@ -4,7 +4,7 @@ Key setup(int size) {
     Key key{};
     pc_get_ord(key.modular);
     sym::g_gen(key.base);
-    sym::bp_map(key.base, key.base, key.t_base);
+    sym::bp_map(key.t_base, key.base, key.base);
     key.A = sym::matrix_zp_rand(2, size, key.modular);
     key.B = sym::matrix_zp_rand(B_SIZE, B_SIZE, key.modular);
     key.Bi = sym::matrix_transpose(sym::matrix_inverse(key.B, B_SIZE, key.modular), B_SIZE, B_SIZE);
@@ -12,7 +12,7 @@ Key setup(int size) {
 }
 
 Ct enc(Key key, const int *message, int size) {
-    // Declare the returned ciphertext and convert message to ZP_ASYM.
+    // Declare the returned ciphertext and convert message to asymZp.
     Ct ct{};
     symZpVec x = sym::vector_zp_from_int(message, size, key.modular);
 

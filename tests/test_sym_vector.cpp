@@ -1,12 +1,12 @@
 #include "sym_vector.hpp"
 
-int test_zp_from_int(bn_st *N) {
+int test_zp_from_int(symPoint N) {
     int int_vec[4] = {1, 2, 3, 4};
     symZpVec x = sym::vector_zp_from_int(int_vec, 4, N);
     return sym::zp_cmp_int(x[3], 4);
 }
 
-int test_merge_vector(bn_st *N) {
+int test_merge_vector(symPoint N) {
     int int_vec_x[3] = {1, 2, 3};
     int int_vec_y[3] = {11, 22, 33};
     symZpVec x = sym::vector_zp_from_int(int_vec_x, 3, N);
@@ -15,7 +15,7 @@ int test_merge_vector(bn_st *N) {
     return sym::zp_cmp_int(z[5], 33);
 }
 
-int test_add_vector(bn_st *N) {
+int test_add_vector(symPoint N) {
     int int_vec_x[3] = {1, 2, 3};
     int int_vec_y[3] = {11, 22, 33};
     symZpVec x = sym::vector_zp_from_int(int_vec_x, 3, N);
@@ -24,7 +24,7 @@ int test_add_vector(bn_st *N) {
     return sym::zp_cmp_int(z[2], 36);
 }
 
-int test_inner_product(bn_st *N) {
+int test_inner_product(symPoint N) {
     int int_vec_x[3] = {1, 2, 3};
     int int_vec_y[3] = {4, 5, 6};
     symZpVec x = sym::vector_zp_from_int(int_vec_x, 3, N);
@@ -38,7 +38,7 @@ int test_inner_product(bn_st *N) {
 
     symGt b, r;
     sym::inner_product(r, gx, gy, 3);
-    sym::bp_map(base, base, b);
+    sym::bp_map(b, base, base);
     gt_exp_dig(b, b, 32);
 
     return gt_cmp(b, r);
