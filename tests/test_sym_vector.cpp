@@ -32,7 +32,7 @@ int test_inner_product(sym::point N) {
     sym::zpVec y = sym::vector_zp_from_int(int_vec_y, 3, N);
     sym::Zp z = sym::zp_from_int(32, N);
 
-    // Set base and raise to vector power.
+    // Set g_base and raise to vector power.
     sym::g base;
     sym::gVec gx, gy;
     sym::g_gen(base);

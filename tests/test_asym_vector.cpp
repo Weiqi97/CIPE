@@ -32,7 +32,7 @@ int test_inner_product(asym::point N) {
     asym::zpVec y = asym::vector_zp_from_int(int_vec_y, 3, N);
     asym::Zp z = asym::zp_from_int(32, N);
 
-    // Set base and raise to vector power.
+    // Set g_base and raise to vector power.
     asym::g1 g1_gen;
     asym::g1Vec g1x;
     asym::g1_gen(g1_gen);

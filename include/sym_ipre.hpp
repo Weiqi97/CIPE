@@ -6,24 +6,25 @@
 namespace sym::ipre {
     const int B_SIZE = 4;
 
-    struct Key {
-        sym::zpMat A;
-        sym::zpMat B;
-        sym::zpMat Bi;
-        sym::g base;
-        sym::gt t_base;
-        sym::point mod;
+    // Struct for secret key.
+    struct Sk {
+        zpMat A;
+        zpMat B;
+        zpMat Bi;
+        g g_base;
+        gt gt_base;
+        point mod;
     };
 
     struct Ct {
-        sym::gVec ctx;
-        sym::gVec ctk;
-        sym::gVec ctc;
+        gVec ctx;
+        gVec ctk;
+        gVec ctc;
     };
 
-    Key setup(point secpar, int size);
+    Sk setup(point secpar, int size);
 
-    Ct enc(Key key, const int *message, int size);
+    Ct enc(Sk key, const int *message, int size);
 
-    int eval(Key key, Ct x, Ct y, int size, int bound);
+    int eval(Sk key, Ct x, Ct y, int size, int bound);
 }

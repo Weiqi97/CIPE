@@ -5,7 +5,7 @@ int test_scheme(sym::point N) {
     int x[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     int y[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 100};
     // Initialize the scheme.
-    sym::ipre::Key key = sym::ipre::setup(N, 10);
+    sym::ipre::Sk key = sym::ipre::setup(N, 10);
     // Encrypt the messages.
     sym::ipre::Ct ct_x = sym::ipre::enc(key, x, 10);
     sym::ipre::Ct ct_y = sym::ipre::enc(key, y, 10);
