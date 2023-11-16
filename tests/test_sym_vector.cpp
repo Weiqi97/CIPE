@@ -25,21 +25,25 @@ int test_add_vector(sym::point N) {
 }
 
 int test_inner_product(sym::point N) {
+    // Set vectors.
     int int_vec_x[3] = {1, 2, 3};
     int int_vec_y[3] = {4, 5, 6};
     sym::zpVec x = sym::vector_zp_from_int(int_vec_x, 3, N);
     sym::zpVec y = sym::vector_zp_from_int(int_vec_y, 3, N);
+    sym::Zp z = sym::zp_from_int(32, N);
 
+    // Set base and raise to vector power.
     sym::g base;
     sym::gVec gx, gy;
     sym::g_gen(base);
     gx = sym::vector_raise(base, x, 3);
     gy = sym::vector_raise(base, y, 3);
 
+    // Compute inner product and check.
     sym::gt b, r;
     sym::inner_product(r, gx, gy, 3);
     sym::bp_map(b, base, base);
-    gt_exp_dig(b, b, 32);
+    sym::gt_raise(b, b, z);
 
     return gt_cmp(b, r) == RLC_EQ;
 }

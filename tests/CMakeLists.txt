@@ -43,6 +43,11 @@ add_executable(test_asym_group test_asym_group.cpp)
 target_link_libraries(test_asym_group PRIVATE asym_fe_lib)
 add_test(NAME test_asym_group COMMAND test_asym_group)
 
+# -----------------------------------------------------
+add_executable(test_asym_vector test_asym_vector.cpp)
+target_link_libraries(test_asym_vector PRIVATE asym_fe_lib)
+add_test(NAME test_asym_vector COMMAND test_asym_vector)
+
 
 
 ## Add tests as separate executables.
