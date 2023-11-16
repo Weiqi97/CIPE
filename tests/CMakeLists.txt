@@ -14,14 +14,14 @@ target_link_libraries(test_sym_group PRIVATE sym_fe_lib)
 add_test(NAME test_sym_group COMMAND test_sym_group)
 
 # -----------------------------------------------------
-add_executable(test_sym_matrix test_sym_matrix.cpp)
-target_link_libraries(test_sym_matrix PRIVATE sym_fe_lib)
-add_test(NAME test_sym_matrix COMMAND test_sym_matrix)
-
-# -----------------------------------------------------
 add_executable(test_sym_vector test_sym_vector.cpp)
 target_link_libraries(test_sym_vector PRIVATE sym_fe_lib)
 add_test(NAME test_sym_vector COMMAND test_sym_vector)
+
+# -----------------------------------------------------
+add_executable(test_sym_matrix test_sym_matrix.cpp)
+target_link_libraries(test_sym_matrix PRIVATE sym_fe_lib)
+add_test(NAME test_sym_matrix COMMAND test_sym_matrix)
 
 # -----------------------------------------------------
 add_executable(test_sym_ipre test_sym_ipre.cpp)
@@ -47,6 +47,11 @@ add_test(NAME test_asym_group COMMAND test_asym_group)
 add_executable(test_asym_vector test_asym_vector.cpp)
 target_link_libraries(test_asym_vector PRIVATE asym_fe_lib)
 add_test(NAME test_asym_vector COMMAND test_asym_vector)
+
+# -----------------------------------------------------
+add_executable(test_asym_matrix test_asym_matrix.cpp)
+target_link_libraries(test_asym_matrix PRIVATE asym_fe_lib)
+add_test(NAME test_asym_matrix COMMAND test_asym_matrix)
 
 
 
