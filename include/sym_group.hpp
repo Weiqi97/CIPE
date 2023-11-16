@@ -2,16 +2,16 @@
 
 #include "sym_field.hpp"
 
-typedef g1_t symG;
-typedef gt_t symGt;
-
 namespace sym {
-    void g_gen(symG x);
+    using g = g1_t;
 
-    void g_mul(symG r, symG x, symZp y);
+    using gt = gt_t;
 
-    void gt_raise(symGt r, symGt x, symZp y);
+    void g_gen(g x);
 
-    void bp_map(symGt r, symG a, symG b);
+    void g_mul(g r, g x, Zp y);
+
+    void gt_raise(gt r, gt x, Zp y);
+
+    void bp_map(gt r, g a, g b);
 }
-

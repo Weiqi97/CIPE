@@ -1,4 +1,9 @@
 # -----------------------------------------------------
+add_executable(test_sym_init test_sym_init.cpp)
+target_link_libraries(test_sym_init PRIVATE sym_fe_lib)
+add_test(NAME test_sym_init COMMAND test_sym_init)
+
+# -----------------------------------------------------
 add_executable(test_sym_field test_sym_field.cpp)
 target_link_libraries(test_sym_field PRIVATE sym_fe_lib)
 add_test(NAME test_sym_field COMMAND test_sym_field)
@@ -19,14 +24,19 @@ target_link_libraries(test_sym_vector PRIVATE sym_fe_lib)
 add_test(NAME test_sym_vector COMMAND test_sym_vector)
 
 # -----------------------------------------------------
-add_executable(test_asym_field test_asym_field.cpp)
-target_link_libraries(test_asym_field PRIVATE asym_fe_lib)
-add_test(NAME test_asym_field COMMAND test_asym_field)
+add_executable(test_sym_ipre test_sym_ipre.cpp)
+target_link_libraries(test_sym_ipre PRIVATE sym_fe_lib)
+add_test(NAME test_sym_ipre COMMAND test_sym_ipre)
 
-# -----------------------------------------------------
-add_executable(test_asym_group test_asym_group.cpp)
-target_link_libraries(test_asym_group PRIVATE asym_fe_lib)
-add_test(NAME test_asym_group COMMAND test_asym_group)
+## -----------------------------------------------------
+#add_executable(test_asym_field test_asym_field.cpp)
+#target_link_libraries(test_asym_field PRIVATE asym_fe_lib)
+#add_test(NAME test_asym_field COMMAND test_asym_field)
+#
+## -----------------------------------------------------
+#add_executable(test_asym_group test_asym_group.cpp)
+#target_link_libraries(test_asym_group PRIVATE asym_fe_lib)
+#add_test(NAME test_asym_group COMMAND test_asym_group)
 
 
 

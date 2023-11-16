@@ -1,75 +1,75 @@
 #include "sym_field.hpp"
 
-symZp sym::zp_rand(symPoint modular) {
-    symZp result;
-    bn_rand_mod(result.point, modular);
-    bn_copy(result.modular, modular);
+sym::Zp sym::zp_rand(point mod) {
+    Zp result;
+    bn_rand_mod(result.num, mod);
+    bn_copy(result.mod, mod);
     return result;
 }
 
-symZp sym::zp_zero(symPoint modular) {
-    symZp result;
-    bn_set_dig(result.point, 0);
-    bn_copy(result.modular, modular);
+sym::Zp sym::zp_zero(point mod) {
+    Zp result;
+    bn_set_dig(result.num, 0);
+    bn_copy(result.mod, mod);
     return result;
 }
 
-symZp sym::zp_one(symPoint modular) {
-    symZp result;
-    bn_set_dig(result.point, 1);
-    bn_copy(result.modular, modular);
+sym::Zp sym::zp_one(point mod) {
+    Zp result;
+    bn_set_dig(result.num, 1);
+    bn_copy(result.mod, mod);
     return result;
 }
 
-symZp sym::zp_copy(symZp x) {
-    symZp result;
-    bn_copy(result.point, x.point);
-    bn_copy(result.modular, x.modular);
+sym::Zp sym::zp_copy(Zp x) {
+    Zp result;
+    bn_copy(result.num, x.num);
+    bn_copy(result.mod, x.mod);
     return result;
 }
 
-symZp sym::zp_from_int(int x, symPoint modular) {
-    symZp result;
-    bn_set_dig(result.point, x);
-    bn_copy(result.modular, modular);
+sym::Zp sym::zp_from_int(int x, point mod) {
+    Zp result;
+    bn_set_dig(result.num, x);
+    bn_copy(result.mod, mod);
     return result;
 }
 
-symZp sym::zp_add(symZp x, symZp y) {
-    symZp result;
-    bn_add(result.point, x.point, y.point);
-    bn_mod(result.point, result.point, x.modular);
-    bn_copy(result.modular, x.modular);
+sym::Zp sym::zp_add(Zp x, Zp y) {
+    Zp result;
+    bn_add(result.num, x.num, y.num);
+    bn_mod(result.num, result.num, x.mod);
+    bn_copy(result.mod, x.mod);
     return result;
 }
 
-symZp sym::zp_neg(symZp x) {
-    symZp result;
-    bn_neg(result.point, x.point);
-    bn_mod(result.point, result.point, x.modular);
-    bn_copy(result.modular, x.modular);
+sym::Zp sym::zp_neg(Zp x) {
+    Zp result;
+    bn_neg(result.num, x.num);
+    bn_mod(result.num, result.num, x.mod);
+    bn_copy(result.mod, x.mod);
     return result;
 }
 
-symZp sym::zp_mul(symZp x, symZp y) {
-    symZp result;
-    bn_mul(result.point, x.point, y.point);
-    bn_mod(result.point, result.point, x.modular);
-    bn_copy(result.modular, x.modular);
+sym::Zp sym::zp_mul(Zp x, Zp y) {
+    Zp result;
+    bn_mul(result.num, x.num, y.num);
+    bn_mod(result.num, result.num, x.mod);
+    bn_copy(result.mod, x.mod);
     return result;
 }
 
-symZp sym::zp_inv(symZp x) {
-    symZp result;
-    bn_mod_inv(result.point, x.point, x.modular);
-    bn_copy(result.modular, x.modular);
+sym::Zp sym::zp_inv(Zp x) {
+    Zp result;
+    bn_mod_inv(result.num, x.num, x.mod);
+    bn_copy(result.mod, x.mod);
     return result;
 }
 
-int sym::zp_cmp(symZp x, symZp y) {
-    return bn_cmp(x.point, y.point) == RLC_EQ;
+int sym::zp_cmp(Zp x, Zp y) {
+    return bn_cmp(x.num, y.num) == RLC_EQ;
 }
 
-int sym::zp_cmp_int(symZp x, int y) {
-    return bn_cmp_dig(x.point, y) == RLC_EQ;
+int sym::zp_cmp_int(Zp x, int y) {
+    return bn_cmp_dig(x.num, y) == RLC_EQ;
 }

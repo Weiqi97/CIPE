@@ -1,38 +1,32 @@
 #pragma once
 
-#include <gmp.h>
-
-extern "C" {
-#include "relic_sym/relic.h"
-}
-
-// Set specific sym data types.
-typedef bn_t symPoint;
-struct symZp {
-    symPoint point{};
-    symPoint modular{};
-};
+#include "sym_init.hpp"
 
 namespace sym {
-    symZp zp_rand(symPoint modular);
+    struct Zp {
+        point num{};
+        point mod{};
+    };
 
-    symZp zp_zero(symPoint modular);
+    Zp zp_rand(point mod);
 
-    symZp zp_one(symPoint modular);
+    Zp zp_zero(point mod);
 
-    symZp zp_copy(symZp x);
+    Zp zp_one(point mod);
 
-    symZp zp_from_int(int x, symPoint modular);
+    Zp zp_copy(Zp x);
 
-    symZp zp_add(symZp x, symZp y);
+    Zp zp_from_int(int x, point mod);
 
-    symZp zp_neg(symZp x);
+    Zp zp_add(Zp x, Zp y);
 
-    symZp zp_mul(symZp x, symZp y);
+    Zp zp_neg(Zp x);
 
-    symZp zp_inv(symZp x);
+    Zp zp_mul(Zp x, Zp y);
 
-    int zp_cmp(symZp x, symZp y);
+    Zp zp_inv(Zp x);
 
-    int zp_cmp_int(symZp x, int y);
+    int zp_cmp(Zp x, Zp y);
+
+    int zp_cmp_int(Zp x, int y);
 }

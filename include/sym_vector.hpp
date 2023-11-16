@@ -3,19 +3,20 @@
 #include "sym_field.hpp"
 #include "sym_group.hpp"
 
-typedef symZp *symZpVec;
-typedef symG *symGVec;
-
 namespace sym {
-    symZpVec vector_zp_from_int(const int *int_vec, int size, symPoint modular);
+    using zpVec = sym::Zp *;
 
-    symZpVec vector_zp_rand(int size, symPoint modular);
+    using gVec = sym::g *;
 
-    symZpVec vector_merge(symZpVec a, symZpVec b, int size_a, int size_b);
+    zpVec vector_zp_from_int(const int *int_vec, int size, point mod);
 
-    symZpVec vector_add(symZpVec a, symZpVec b, int size);
+    zpVec vector_zp_rand(int size, point mod);
 
-    symGVec vector_raise(symG base, symZpVec x, int size);
+    zpVec vector_merge(zpVec a, zpVec b, int size_a, int size_b);
 
-    void inner_product(symGt r, symGVec a, symGVec b, int size);
+    zpVec vector_add(zpVec a, zpVec b, int size);
+
+    gVec vector_raise(g base, zpVec x, int size);
+
+    void inner_product(gt r, gVec a, gVec b, int size);
 }
