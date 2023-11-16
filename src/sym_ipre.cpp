@@ -1,4 +1,4 @@
-#include "ipre.hpp"
+#include "sym_ipre.hpp"
 
 Key setup(int size) {
     Key key{};

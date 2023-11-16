@@ -1,31 +1,31 @@
 # -----------------------------------------------------
 add_executable(test_sym_field test_sym_field.cpp)
-target_link_libraries(test_sym_field PRIVATE ppann_lib)
+target_link_libraries(test_sym_field PRIVATE sym_fe_lib)
 add_test(NAME test_sym_field COMMAND test_sym_field)
 
 # -----------------------------------------------------
 add_executable(test_sym_group test_sym_group.cpp)
-target_link_libraries(test_sym_group PRIVATE ppann_lib)
+target_link_libraries(test_sym_group PRIVATE sym_fe_lib)
 add_test(NAME test_sym_group COMMAND test_sym_group)
 
 # -----------------------------------------------------
 add_executable(test_sym_matrix test_sym_matrix.cpp)
-target_link_libraries(test_sym_matrix PRIVATE ppann_lib)
+target_link_libraries(test_sym_matrix PRIVATE sym_fe_lib)
 add_test(NAME test_sym_matrix COMMAND test_sym_matrix)
 
 # -----------------------------------------------------
 add_executable(test_sym_vector test_sym_vector.cpp)
-target_link_libraries(test_sym_vector PRIVATE ppann_lib)
+target_link_libraries(test_sym_vector PRIVATE sym_fe_lib)
 add_test(NAME test_sym_vector COMMAND test_sym_vector)
 
 # -----------------------------------------------------
 add_executable(test_asym_field test_asym_field.cpp)
-target_link_libraries(test_asym_field PRIVATE ppann_lib)
+target_link_libraries(test_asym_field PRIVATE asym_fe_lib)
 add_test(NAME test_asym_field COMMAND test_asym_field)
 
 # -----------------------------------------------------
 add_executable(test_asym_group test_asym_group.cpp)
-target_link_libraries(test_asym_group PRIVATE ppann_lib)
+target_link_libraries(test_asym_group PRIVATE asym_fe_lib)
 add_test(NAME test_asym_group COMMAND test_asym_group)
 
 

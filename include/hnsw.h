@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include "ipre.hpp"
+#include "sym_ipre.hpp"
 
 using namespace std;
 
