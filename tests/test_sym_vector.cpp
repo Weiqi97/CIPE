@@ -41,7 +41,7 @@ int test_inner_product(sym::point N) {
     sym::bp_map(b, base, base);
     gt_exp_dig(b, b, 32);
 
-    return gt_cmp(b, r);
+    return gt_cmp(b, r) == RLC_EQ;
 }
 
 int main() {
@@ -53,7 +53,7 @@ int main() {
     if (test_zp_from_int(N) != 1) return 1;
     if (test_merge_vector(N) != 1) return 1;
     if (test_add_vector(N) != 1) return 1;
-    if (test_inner_product(N) != RLC_EQ) return 1;
+    if (test_inner_product(N) != 1) return 1;
 
     return 0;
 }

@@ -28,15 +28,20 @@ add_executable(test_sym_ipre test_sym_ipre.cpp)
 target_link_libraries(test_sym_ipre PRIVATE sym_fe_lib)
 add_test(NAME test_sym_ipre COMMAND test_sym_ipre)
 
-## -----------------------------------------------------
-#add_executable(test_asym_field test_asym_field.cpp)
-#target_link_libraries(test_asym_field PRIVATE asym_fe_lib)
-#add_test(NAME test_asym_field COMMAND test_asym_field)
-#
-## -----------------------------------------------------
-#add_executable(test_asym_group test_asym_group.cpp)
-#target_link_libraries(test_asym_group PRIVATE asym_fe_lib)
-#add_test(NAME test_asym_group COMMAND test_asym_group)
+# -----------------------------------------------------
+add_executable(test_asym_init test_asym_init.cpp)
+target_link_libraries(test_asym_init PRIVATE asym_fe_lib)
+add_test(NAME test_asym_init COMMAND test_asym_init)
+
+# -----------------------------------------------------
+add_executable(test_asym_field test_asym_field.cpp)
+target_link_libraries(test_asym_field PRIVATE asym_fe_lib)
+add_test(NAME test_asym_field COMMAND test_asym_field)
+
+# -----------------------------------------------------
+add_executable(test_asym_group test_asym_group.cpp)
+target_link_libraries(test_asym_group PRIVATE asym_fe_lib)
+add_test(NAME test_asym_group COMMAND test_asym_group)
 
 
 

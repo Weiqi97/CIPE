@@ -12,7 +12,7 @@ sym::ipre::Key sym::ipre::setup(point secpar, int size) {
 }
 
 sym::ipre::Ct sym::ipre::enc(Key key, const int *message, int size) {
-    // Declare the returned ciphertext and convert message to asymZp.
+    // Declare the returned ciphertext and convert message to Zp.
     Ct ct{};
     zpVec x = vector_zp_from_int(message, size, key.mod);
 

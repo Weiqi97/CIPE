@@ -27,7 +27,7 @@ int test_all(sym::point N) {
     sym::gt_raise(z, x, n);
 
     // Compare e(g^5, g^5) with e(g, g)^25.
-    return gt_cmp(y, z);
+    return gt_cmp(y, z) == RLC_EQ;
 }
 
 int main() {
@@ -37,7 +37,7 @@ int main() {
 
     // Perform tests.
     if (test_generator() != 1) return 1;
-    if (test_all(N) != RLC_EQ) return 1;
+    if (test_all(N) != 1) return 1;
 
     return 0;
 }

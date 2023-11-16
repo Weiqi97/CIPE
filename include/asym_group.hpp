@@ -2,20 +2,22 @@
 
 #include "asym_field.hpp"
 
-typedef g1_t asymG1;
-typedef g2_t asymG2;
-typedef gt_t asymGt;
-
 namespace asym {
-    void g1_gen(asymG1 x);
+    using g1 = g1_t;
 
-    void g2_gen(asymG2 x);
+    using g2 = g2_t;
 
-    void g1_mul(asymG1 r, asymG1 x, asymZp y);
+    using gt = gt_t;
 
-    void g2_mul(asymG2 r, asymG2 x, asymZp y);
+    void g1_gen(g1 x);
 
-    void gt_raise(asymGt r, asymGt x, asymZp y);
+    void g2_gen(g2 x);
 
-    void bp_map(asymGt r, asymG1 x, asymG2 y);
+    void g1_mul(g1 r, g1 x, Zp y);
+
+    void g2_mul(g2 r, g2 x, Zp y);
+
+    void gt_raise(gt r, gt x, Zp y);
+
+    void bp_map(gt r, g1 x, g2 y);
 }

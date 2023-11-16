@@ -1,38 +1,32 @@
 #pragma once
 
-#include <gmp.h>
-
-extern "C" {
-#include "relic_asym/relic.h"
-}
-
-// Set specific asym data types.
-typedef bn_t asymPoint;
-struct asymZp {
-    asymPoint point{};
-    asymPoint modular{};
-};
+#include "asym_init.hpp"
 
 namespace asym {
-    asymZp rand_zp(asymPoint modular);
+    struct Zp {
+        point num{};
+        point mod{};
+    };
 
-    asymZp zp_zero(asymPoint modular);
+    Zp rand_zp(point mod);
 
-    asymZp zp_one(asymPoint modular);
+    Zp zp_zero(point mod);
 
-    asymZp zp_copy(asymZp x);
+    Zp zp_one(point mod);
 
-    asymZp zp_from_int(int x, asymPoint modular);
+    Zp zp_copy(Zp x);
 
-    asymZp zp_add(asymZp x, asymZp y);
+    Zp zp_from_int(int x, point mod);
 
-    asymZp zp_neg(asymZp x);
+    Zp zp_add(Zp x, Zp y);
 
-    asymZp zp_mul(asymZp x, asymZp y);
+    Zp zp_neg(Zp x);
 
-    asymZp zp_inv(asymZp x);
+    Zp zp_mul(Zp x, Zp y);
 
-    int zp_cmp(asymZp x, asymZp y);
+    Zp zp_inv(Zp x);
 
-    int zp_cmp_int(asymZp x, int y);
+    int zp_cmp(Zp x, Zp y);
+
+    int zp_cmp_int(Zp x, int y);
 }
