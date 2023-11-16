@@ -24,7 +24,7 @@ namespace sym::ipre {
 
     Sk setup(point secpar, int size);
 
-    Ct enc(Sk key, const int *message, int size);
+    Ct enc(Sk sk, const int *message, int size);
 
-    int eval(Sk key, Ct x, Ct y, int size, int bound);
+    int eval(Sk sk, Ct x, Ct y, int size, int bound);
 }

@@ -53,6 +53,11 @@ add_executable(test_asym_matrix test_asym_matrix.cpp)
 target_link_libraries(test_asym_matrix PRIVATE asym_fe_lib)
 add_test(NAME test_asym_matrix COMMAND test_asym_matrix)
 
+# -----------------------------------------------------
+add_executable(test_asym_ipfe test_asym_ipfe.cpp)
+target_link_libraries(test_asym_ipfe PRIVATE asym_fe_lib)
+add_test(NAME test_asym_ipfe COMMAND test_asym_ipfe)
+
 
 
 ## Add tests as separate executables.

@@ -19,7 +19,7 @@ namespace asym::ipfe {
 
     struct Key {
         g1Vec ctx;
-        g2Vec ctk;
+        g1Vec ctk;
     };
 
     struct Ct {

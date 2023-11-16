@@ -1,45 +1,45 @@
 #include "sym_ipre.hpp"
 
 sym::ipre::Sk sym::ipre::setup(point secpar, int size) {
-    Sk key{};
-    bn_copy(key.mod, secpar);
-    g_gen(key.g_base);
-    bp_map(key.gt_base, key.g_base, key.g_base);
-    key.A = matrix_zp_rand(2, size, key.mod);
-    key.B = matrix_zp_rand(B_SIZE, B_SIZE, key.mod);
-    key.Bi = matrix_transpose(matrix_inverse(key.B, B_SIZE, key.mod), B_SIZE, B_SIZE);
-    return key;
+    Sk sk{};
+    bn_copy(sk.mod, secpar);
+    g_gen(sk.g_base);
+    bp_map(sk.gt_base, sk.g_base, sk.g_base);
+    sk.A = matrix_zp_rand(2, size, sk.mod);
+    sk.B = matrix_zp_rand(B_SIZE, B_SIZE, sk.mod);
+    sk.Bi = matrix_transpose(matrix_inverse(sk.B, B_SIZE, sk.mod), B_SIZE, B_SIZE);
+    return sk;
 }
 
-sym::ipre::Ct sym::ipre::enc(Sk key, const int *message, int size) {
+sym::ipre::Ct sym::ipre::enc(Sk sk, const int *message, int size) {
     // Declare the returned ciphertext and convert message to Zp.
     Ct ct{};
-    zpVec x = vector_zp_from_int(message, size, key.mod);
+    zpVec x = vector_zp_from_int(message, size, sk.mod);
 
     // We generate s and compute sA + x.
-    zpVec s = vector_zp_rand(2, key.mod);
-    zpVec sA = matrix_multiply(s, key.A, 1, 2, size, key.mod);
+    zpVec s = vector_zp_rand(2, sk.mod);
+    zpVec sA = matrix_multiply(s, sk.A, 1, 2, size, sk.mod);
     zpVec sAx = vector_add(sA, x, size);
-    ct.ctx = vector_raise(key.g_base, sAx, size);
-
-    // We compute the function hiding inner product encryption Sk.
-    zpMat AT = matrix_transpose(key.A, 2, size);
-    zpVec xAT = matrix_multiply(x, AT, 1, size, 2, key.mod);
-    zpVec xATs = vector_merge(xAT, s, 2, 2);
-    zpVec xATsB = matrix_multiply(xATs, key.B, 1, B_SIZE, B_SIZE, key.mod);
-    ct.ctc = vector_raise(key.g_base, xATsB, B_SIZE);
+    ct.ctx = vector_raise(sk.g_base, sAx, size);
 
     // We compute the function hiding inner product encryption ciphertext.
-    zpVec sAAT = matrix_multiply(sA, AT, 1, size, 2, key.mod);
+    zpMat AT = matrix_transpose(sk.A, 2, size);
+    zpVec xAT = matrix_multiply(x, AT, 1, size, 2, sk.mod);
+    zpVec xATs = vector_merge(xAT, s, 2, 2);
+    zpVec xATsB = matrix_multiply(xATs, sk.B, 1, B_SIZE, B_SIZE, sk.mod);
+    ct.ctc = vector_raise(sk.g_base, xATsB, B_SIZE);
+
+    // We compute the function hiding inner product encryption derived key.
+    zpVec sAAT = matrix_multiply(sA, AT, 1, size, 2, sk.mod);
     zpVec xATsAAT = vector_add(xAT, sAAT, 2);
     zpVec sxATsAAT = vector_merge(s, xATsAAT, 2, 2);
-    zpVec sxATsAATBi = matrix_multiply(sxATsAAT, key.Bi, 1, B_SIZE, B_SIZE, key.mod);
-    ct.ctk = vector_raise(key.g_base, sxATsAATBi, B_SIZE);
+    zpVec sxATsAATBi = matrix_multiply(sxATsAAT, sk.Bi, 1, B_SIZE, B_SIZE, sk.mod);
+    ct.ctk = vector_raise(sk.g_base, sxATsAATBi, B_SIZE);
 
     return ct;
 }
 
-int sym::ipre::eval(Sk key, Ct x, Ct y, int size, int bound) {
+int sym::ipre::eval(Sk sk, Ct x, Ct y, int size, int bound) {
     // Decrypt components.
     gt xy, ct;
     inner_product(xy, x.ctx, y.ctx, size);
@@ -54,7 +54,7 @@ int sym::ipre::eval(Sk key, Ct x, Ct y, int size, int bound) {
 
     // Iterate through a loop to find correct answer.
     for (int i = 1; i <= bound; i++) {
-        gt_exp_dig(output, key.gt_base, i);
+        gt_exp_dig(output, sk.gt_base, i);
         if (gt_cmp(output, xy) == RLC_EQ) return i;
     }
 
