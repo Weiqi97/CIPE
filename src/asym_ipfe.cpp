@@ -1,5 +1,8 @@
 #include "asym_ipfe.hpp"
 
+// A global value for this specific scheme only.
+const static int B_SIZE = 4;
+
 asym::ipfe::Sk asym::ipfe::setup(point secpar, int size) {
     Sk sk{};
     bn_copy(sk.mod, secpar);

@@ -4,7 +4,7 @@
 #include "asym_matrix.hpp"
 
 namespace asym::ipfe {
-    const int B_SIZE = 4;
+
 
     // Struct for secret key.
     struct Sk {
