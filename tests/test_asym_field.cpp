@@ -29,7 +29,7 @@ int test_zp_add(asym::point N) {
 }
 
 int test_zp_neg(asym::point N) {
-    asym::Zp x = asym::rand_zp(N);
+    asym::Zp x = asym::zp_rand(N);
     asym::Zp y = asym::zp_neg(x);
     asym::Zp z = asym::zp_add(x, y);
     return asym::zp_cmp_int(z, 0);
@@ -43,7 +43,7 @@ int test_zp_mul(asym::point N) {
 }
 
 int test_zp_inv(asym::point N) {
-    asym::Zp x = asym::rand_zp(N);
+    asym::Zp x = asym::zp_rand(N);
     asym::Zp y = asym::zp_inv(x);
     asym::Zp z = asym::zp_mul(x, y);
     return asym::zp_cmp_int(z, 1);

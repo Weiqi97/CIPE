@@ -8,7 +8,7 @@ namespace asym {
         point mod{};
     };
 
-    Zp rand_zp(point mod);
+    Zp zp_rand(point mod);
 
     Zp zp_zero(point mod);
 

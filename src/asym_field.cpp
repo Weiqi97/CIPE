@@ -1,6 +1,6 @@
 #include "asym_field.hpp"
 
-asym::Zp asym::rand_zp(point mod) {
+asym::Zp asym::zp_rand(point mod) {
     Zp result;
     bn_rand_mod(result.num, mod);
     bn_copy(result.mod, mod);
