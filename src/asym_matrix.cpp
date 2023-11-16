@@ -137,3 +137,63 @@ asym::zpMat asym::matrix_inverse(zpMat x, int size, point mod) {
     }
     return xi;
 }
+
+asym::zpMat asym::matrix_inverse_with_det(zpMat x, Zp &det, int size, point mod) {
+    // Declare the row echelon matrix and generate it.
+    zpMat identity = matrix_identity(size, mod);
+    zpMat row_echelon = matrix_merge(x, identity, size, size, size);
+
+    // Declare temp value.
+    Zp temp_multiplier;
+    Zp temp_neg;
+
+    // Set determinant to 1.
+    det = zp_copy(zp_from_int(1, mod));
+
+    // Bottom left half to all zeros.
+    for (int i = 0; i < size; i++) {
+        for (int j = i; j < size; j++) {
+            if (i == j && !zp_cmp_int(row_echelon[i * 2 * size + j], 1)) {
+                // Compute determinant.
+                det = zp_mul(det, row_echelon[i * 2 * size + j]);
+                temp_multiplier = zp_inv(row_echelon[i * 2 * size + i]);
+                for (int k = i; k < size * 2; k++) {
+                    row_echelon[j * 2 * size + k] = zp_mul(row_echelon[j * 2 * size + k], temp_multiplier);
+                }
+            }
+
+            if (i == j && zp_cmp_int(row_echelon[i * 2 * size + j], 0)) break;
+
+            if (i != j) {
+                temp_multiplier = zp_copy(row_echelon[j * 2 * size + i]);
+                for (int k = i; k < size * 2; k++) {
+                    temp_neg = zp_mul(temp_multiplier, row_echelon[i * 2 * size + k]);
+                    temp_neg = zp_neg(temp_neg);
+                    row_echelon[j * 2 * size + k] = zp_add(row_echelon[j * 2 * size + k], temp_neg);
+                }
+            }
+        }
+    }
+
+    // Top right half to all zeros.
+    for (int i = size - 1; i > 0; i--) {
+        for (int j = i - 1; j >= 0; j--) {
+            temp_multiplier = zp_copy(row_echelon[j * 2 * size + i]);
+            for (int k = i; k < size * 2; k++) {
+                temp_neg = zp_mul(temp_multiplier, row_echelon[i * 2 * size + k]);
+                temp_neg = zp_neg(temp_neg);
+                row_echelon[j * 2 * size + k] = zp_add(row_echelon[j * 2 * size + k], temp_neg);
+            }
+        }
+    }
+
+    // Copy over the output.
+    zpMat xi;
+    xi = (zpMat) malloc(sizeof(Zp) * size * size);
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            xi[i * size + j] = zp_copy(row_echelon[i * 2 * size + size + j]);
+        }
+    }
+    return xi;
+}

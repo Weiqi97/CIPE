@@ -51,6 +51,17 @@ int test_inverse(asym::point N) {
     return asym::matrix_is_identity(r, size);
 }
 
+int test_inverse_with_det(asym::point N) {
+    int size = 3;
+    int mat[9] = {3, 5, 8, 2, 2, 2, 9, 9, 3};
+    asym::zpMat x = asym::matrix_zp_from_int(mat, size, size, N);
+
+    asym::Zp det;
+    asym::matrix_inverse_with_det(x, det, size, N);
+
+    return asym::zp_cmp_int(det, 24) == 1;
+}
+
 int main() {
     // Init core and setup.
     asym::point N;
@@ -63,6 +74,7 @@ int main() {
     if (test_merge(N) != 1) return 1;
     if (test_multiply_vector(N) != 1) return 1;
     if (test_inverse(N) != 1) return 1;
+    if (test_inverse_with_det(N) != 1) return 1;
 
     return 0;
 }

@@ -3,7 +3,7 @@
 #include "asym_field.hpp"
 
 namespace asym {
-    using zpMat = asym::Zp *;
+    using zpMat = Zp *;
 
     zpMat matrix_zp_from_int(const int *int_mat, int row, int col, point mod);
 
@@ -20,4 +20,6 @@ namespace asym {
     zpMat matrix_multiply(zpMat x, zpMat y, int row_x, int row_y, int col_y, point mod);
 
     zpMat matrix_inverse(zpMat x, int size, point mod);
+
+    zpMat matrix_inverse_with_det(zpMat x, Zp &det, int size, point mod);
 }
