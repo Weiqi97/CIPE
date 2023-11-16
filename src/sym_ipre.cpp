@@ -16,11 +16,6 @@ sym::ipre::Ct sym::ipre::enc(Key key, const int *message, int size) {
     Ct ct{};
     zpVec x = vector_zp_from_int(message, size, key.mod);
 
-    // Helper values.
-    int one[] = {1}, zero[] = {0};
-    zpVec one_vec = vector_zp_from_int(one, 1, key.mod);
-    zpVec zero_vec = vector_zp_from_int(zero, 1, key.mod);
-
     // We generate s and compute sA + x.
     zpVec s = vector_zp_rand(2, key.mod);
     zpVec sA = matrix_multiply(s, key.A, 1, 2, size, key.mod);
@@ -31,19 +26,15 @@ sym::ipre::Ct sym::ipre::enc(Key key, const int *message, int size) {
     zpMat AT = matrix_transpose(key.A, 2, size);
     zpVec xAT = matrix_multiply(x, AT, 1, size, 2, key.mod);
     zpVec xATs = vector_merge(xAT, s, 2, 2);
-    zpVec xATs0 = vector_merge(xATs, zero_vec, 4, 1);
-    zpVec xATs01 = vector_merge(xATs0, one_vec, 5, 1);
-    zpVec xATs01_B = matrix_multiply(xATs01, key.B, 1, B_SIZE, B_SIZE, key.mod);
-    ct.ctc = vector_raise(key.base, xATs01_B, B_SIZE);
+    zpVec xATsB = matrix_multiply(xATs, key.B, 1, B_SIZE, B_SIZE, key.mod);
+    ct.ctc = vector_raise(key.base, xATsB, B_SIZE);
 
     // We compute the function hiding inner product encryption ciphertext.
     zpVec sAAT = matrix_multiply(sA, AT, 1, size, 2, key.mod);
     zpVec xATsAAT = vector_add(xAT, sAAT, 2);
     zpVec sxATsAAT = vector_merge(s, xATsAAT, 2, 2);
-    zpVec sxATsAAT1 = vector_merge(sxATsAAT, one_vec, 4, 1);
-    zpVec sxATsAAT10 = vector_merge(sxATsAAT1, zero_vec, 5, 1);
-    zpVec sxATsAAT10_Bi = matrix_multiply(sxATsAAT10, key.Bi, 1, B_SIZE, B_SIZE, key.mod);
-    ct.ctk = vector_raise(key.base, sxATsAAT10_Bi, B_SIZE);
+    zpVec sxATsAATBi = matrix_multiply(sxATsAAT, key.Bi, 1, B_SIZE, B_SIZE, key.mod);
+    ct.ctk = vector_raise(key.base, sxATsAATBi, B_SIZE);
 
     return ct;
 }

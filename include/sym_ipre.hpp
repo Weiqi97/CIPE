@@ -4,7 +4,7 @@
 #include "sym_matrix.hpp"
 
 namespace sym::ipre {
-    const int B_SIZE = 6;
+    const int B_SIZE = 4;
 
     struct Key {
         sym::zpMat A;
