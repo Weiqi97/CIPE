@@ -83,6 +83,15 @@ asym::zpMat asym::matrix_multiply(zpMat x, zpMat y, int row_x, int row_y, int co
     return xy;
 }
 
+asym::zpMat asym::matrix_multiply_constant(asym::zpMat x, asym::Zp c, int row, int col) {
+    auto xc = (zpMat) malloc(sizeof(Zp) * row * col);
+
+    for (int i = 0; i < row * col; i++) xc[i] = zp_mul(x[i], c);
+
+    return xc;
+}
+
+
 asym::zpMat asym::matrix_inverse(zpMat x, int size, point mod) {
     // Declare the row echelon matrix and generate it.
     zpMat identity = matrix_identity(size, mod);

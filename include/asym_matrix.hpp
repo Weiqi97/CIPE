@@ -81,7 +81,7 @@ namespace asym {
      * @param mod - the size of the field.
      * @return the multiplied matrix.
      */
-    zpMat matrix_multiply_constant(zpMat x, Zp c, int row, int col, point mod);
+    zpMat matrix_multiply_constant(zpMat x, Zp c, int row, int col);
 
     /**
      * Compute inverse of a square matrix using Gaussian elimination.

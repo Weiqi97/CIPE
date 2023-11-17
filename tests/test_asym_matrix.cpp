@@ -43,6 +43,15 @@ int test_multiply_vector(asym::point N) {
     return asym::zp_cmp_int(xy[2], 450);
 }
 
+int test_multiply_constant(asym::point N) {
+    int mat_x[6] = {1, 2, 3, 4, 5, 6};
+    asym::zpMat x = asym::matrix_zp_from_int(mat_x, 1, 5, N);
+    asym::Zp c = asym::zp_from_int(11, N);
+
+    asym::zpMat xy = asym::matrix_multiply_constant(x, c, 2, 3);
+    return asym::zp_cmp_int(xy[2], 33);
+}
+
 int test_inverse(asym::point N) {
     int size = 10;
     asym::zpMat x = asym::matrix_zp_rand(size, size, N);
@@ -73,6 +82,7 @@ int main() {
     if (test_identity(N) != 1) return 1;
     if (test_merge(N) != 1) return 1;
     if (test_multiply_vector(N) != 1) return 1;
+    if (test_multiply_constant(N) != 1) return 1;
     if (test_inverse(N) != 1) return 1;
     if (test_inverse_with_det(N) != 1) return 1;
 
