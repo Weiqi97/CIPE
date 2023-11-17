@@ -11,7 +11,7 @@ int test_merge_vector(sym::point N) {
     int int_vec_y[3] = {11, 22, 33};
     sym::zpVec x = sym::vector_zp_from_int(int_vec_x, 3, N);
     sym::zpVec y = sym::vector_zp_from_int(int_vec_y, 3, N);
-    sym::zpVec z = sym::vector_merge(x, y, 3, 3);
+    sym::zpVec z = sym::vector_join(x, y, 3, 3);
     return sym::zp_cmp_int(z[5], 33);
 }
 

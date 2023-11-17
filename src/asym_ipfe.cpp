@@ -31,7 +31,7 @@ asym::ipfe::Key asym::ipfe::keyGen(Sk sk, const int *function, int size) {
     zpVec xAT = matrix_multiply(y, AT, 1, size, 2, sk.mod);
     zpVec sAAT = matrix_multiply(sA, AT, 1, size, 2, sk.mod);
     zpVec xATsAAT = vector_add(xAT, sAAT, 2);
-    zpVec sxATsAAT = vector_merge(s, xATsAAT, 2, 2);
+    zpVec sxATsAAT = vector_join(s, xATsAAT, 2, 2);
     zpVec sxATsAATBi = matrix_multiply(sxATsAAT, sk.Bi, 1, B_SIZE, B_SIZE, sk.mod);
     key.ctk = vector_raise_g1(sk.g1_base, sxATsAATBi, B_SIZE);
 
@@ -52,7 +52,7 @@ asym::ipfe::Ct asym::ipfe::enc(Sk sk, const int *message, int size) {
     // We compute the function hiding inner product encryption ciphertext.
     zpMat AT = matrix_transpose(sk.A, 2, size);
     zpVec xAT = matrix_multiply(x, AT, 1, size, 2, sk.mod);
-    zpVec xATs = vector_merge(xAT, s, 2, 2);
+    zpVec xATs = vector_join(xAT, s, 2, 2);
     zpVec xATsB = matrix_multiply(xATs, sk.B, 1, B_SIZE, B_SIZE, sk.mod);
     ct.ctc = vector_raise_g2(sk.g2_base, xATsB, B_SIZE);
 

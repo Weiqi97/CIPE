@@ -14,7 +14,7 @@ sym::zpVec sym::vector_zp_rand(int size, point mod) {
     return x;
 }
 
-sym::zpVec sym::vector_merge(zpVec a, zpVec b, int size_a, int size_b) {
+sym::zpVec sym::vector_join(zpVec a, zpVec b, int size_a, int size_b) {
     zpVec r;
     r = (zpVec) malloc(sizeof(Zp) * (size_a + size_b));
     for (int i = 0; i < size_a; i++) r[i] = zp_copy(a[i]);

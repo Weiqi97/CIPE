@@ -25,14 +25,14 @@ sym::ipre::Ct sym::ipre::enc(Sk sk, const int *message, int size) {
     // We compute the function hiding inner product encryption ciphertext.
     zpMat AT = matrix_transpose(sk.A, 2, size);
     zpVec xAT = matrix_multiply(x, AT, 1, size, 2, sk.mod);
-    zpVec xATs = vector_merge(xAT, s, 2, 2);
+    zpVec xATs = vector_join(xAT, s, 2, 2);
     zpVec xATsB = matrix_multiply(xATs, sk.B, 1, B_SIZE, B_SIZE, sk.mod);
     ct.ctc = vector_raise(sk.g_base, xATsB, B_SIZE);
 
     // We compute the function hiding inner product encryption derived key.
     zpVec sAAT = matrix_multiply(sA, AT, 1, size, 2, sk.mod);
     zpVec xATsAAT = vector_add(xAT, sAAT, 2);
-    zpVec sxATsAAT = vector_merge(s, xATsAAT, 2, 2);
+    zpVec sxATsAAT = vector_join(s, xATsAAT, 2, 2);
     zpVec sxATsAATBi = matrix_multiply(sxATsAAT, sk.Bi, 1, B_SIZE, B_SIZE, sk.mod);
     ct.ctk = vector_raise(sk.g_base, sxATsAATBi, B_SIZE);
 

@@ -55,7 +55,7 @@ sym::zpMat sym::matrix_transpose(zpMat x, int row, int col) {
     return xt;
 }
 
-sym::zpMat sym::matrix_merge(zpMat x, zpMat y, int row, int col_x, int col_y) {
+sym::zpMat sym::matrix_join(zpMat x, zpMat y, int row, int col_x, int col_y) {
     zpMat xy;
     xy = (zpMat) malloc(sizeof(Zp) * row * (col_x + col_y));
     for (int i = 0; i < row; i++) {
@@ -86,7 +86,7 @@ sym::zpMat sym::matrix_multiply(zpMat x, zpMat y, int row_x, int row_y, int col_
 sym::zpMat sym::matrix_inverse(zpMat x, int size, point mod) {
     // Declare the row echelon matrix and generate it.
     zpMat identity = matrix_identity(size, mod);
-    zpMat row_echelon = matrix_merge(x, identity, size, size, size);
+    zpMat row_echelon = matrix_join(x, identity, size, size, size);
 
     // Declare temp value.
     Zp temp_multiplier;
