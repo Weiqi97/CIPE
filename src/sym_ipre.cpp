@@ -1,6 +1,6 @@
 #include "sym_ipre.hpp"
 
-// This value is only useful in this file.
+// A global value for this specific scheme only.
 const static int B_SIZE = 4;
 
 sym::ipre::Pp sym::ipre::ppgen(int size, int bound) {
