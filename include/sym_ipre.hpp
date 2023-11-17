@@ -4,27 +4,34 @@
 #include "sym_matrix.hpp"
 
 namespace sym::ipre {
-    const int B_SIZE = 4;
-
-    // Struct for secret key.
-    struct Sk {
-        zpMat A;
-        zpMat B;
-        zpMat Bi;
+    // Struct for the public parameters.
+    struct Pp {
+        int size;
+        int bound;
         g g_base;
         gt gt_base;
         point mod;
     };
 
+    // Struct for the secret key.
+    struct Sk {
+        zpMat A;
+        zpMat B;
+        zpMat Bi;
+    };
+
+    // Struct for the ciphertext.
     struct Ct {
         gVec ctx;
         gVec ctk;
         gVec ctc;
     };
 
-    Sk setup(point secpar, int size);
+    Pp ppgen(int size, int bound);
 
-    Ct enc(Sk sk, const int *message, int size);
+    Sk setup(Pp pp);
 
-    int eval(Sk sk, Ct x, Ct y, int size, int bound);
+    Ct enc(Pp pp, Sk sk, const int *message);
+
+    int eval(Pp pp, Sk sk, Ct x, Ct y);
 }
