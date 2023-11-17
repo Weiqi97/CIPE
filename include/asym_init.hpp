@@ -7,7 +7,6 @@ extern "C" {
 }
 
 namespace asym {
-
     using point = bn_t;
 
     /**

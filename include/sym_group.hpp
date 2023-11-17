@@ -4,7 +4,6 @@
 
 namespace sym {
     using g = g1_t;
-
     using gt = gt_t;
 
     void g_gen(g x);

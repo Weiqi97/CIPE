@@ -23,7 +23,7 @@ int test_merge(asym::point N) {
     int size = 10;
     asym::zpMat x = asym::matrix_zp_rand(size, size, N);
     asym::zpMat y = asym::matrix_identity(size, N);
-    asym::zpMat xy = asym::matrix_merge(x, y, size, size, size);
+    asym::zpMat xy = asym::matrix_join(x, y, size, size, size);
     return asym::zp_cmp(x[2 * size + 1], xy[4 * size + 1]);
 }
 

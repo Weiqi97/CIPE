@@ -4,11 +4,9 @@
 #include "asym_group.hpp"
 
 namespace asym {
-    using zpVec = asym::Zp *;
-
-    using g1Vec = asym::g1 *;
-
-    using g2Vec = asym::g2 *;
+    using zpVec = Zp *;
+    using g1Vec = g1 *;
+    using g2Vec = g2 *;
 
     zpVec vector_zp_from_int(const int *int_vec, int size, point mod);
 

@@ -3,7 +3,7 @@
 #include "sym_field.hpp"
 
 namespace sym {
-    using zpMat = sym::Zp *;
+    using zpMat = Zp *;
 
     zpMat matrix_zp_from_int(const int *int_mat, int row, int col, point mod);
 
