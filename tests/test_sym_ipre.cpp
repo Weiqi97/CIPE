@@ -12,7 +12,7 @@ int test_scheme() {
     sym::ipre::Ct ct_x = sym::ipre::enc(pp, sk, x);
     sym::ipre::Ct ct_y = sym::ipre::enc(pp, sk, y);
     // Evaluate the two ciphertexts.
-    int output = sym::ipre::eval(pp, sk, ct_x, ct_y);
+    int output = sym::ipre::eval(pp, ct_x, ct_y);
 
     return output == 145;
 }

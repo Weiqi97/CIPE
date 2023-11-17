@@ -49,7 +49,7 @@ sym::ipre::Ct sym::ipre::enc(Pp pp, Sk sk, const int *message) {
     return ct;
 }
 
-int sym::ipre::eval(Pp pp, Sk sk, Ct x, Ct y) {
+int sym::ipre::eval(Pp pp, Ct x, Ct y) {
     // Decrypt components.
     gt xy, ct;
     inner_product(xy, x.ctx, y.ctx, pp.size);

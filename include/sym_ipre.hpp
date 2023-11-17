@@ -33,5 +33,5 @@ namespace sym::ipre {
 
     Ct enc(Pp pp, Sk sk, const int *message);
 
-    int eval(Pp pp, Sk sk, Ct x, Ct y);
+    int eval(Pp pp, Ct x, Ct y);
 }
