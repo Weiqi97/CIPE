@@ -10,21 +10,21 @@ namespace asym {
 
     /**
      * Generate a random value in field Z_mod.
-     * @param mod - size of the field.
+     * @param mod - the size of the field.
      * @return a random point in Z_mod.
      */
     Zp zp_rand(point mod);
 
     /**
      * Generate zero in field Z_mod.
-     * @param mod - size of the field.
+     * @param mod - the size of the field.
      * @return zero in Z_mod.
      */
     Zp zp_zero(point mod);
 
     /**
      * Generate one in field Z_mod.
-     * @param mod - size of the field.
+     * @param mod - the size of the field.
      * @return one in Z_mod.
      */
     Zp zp_one(point mod);

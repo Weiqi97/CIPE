@@ -22,7 +22,7 @@ namespace asym {
     /**
      * Multiply an element in G1 with a Zp element.
      * @param r - the resulting element in G1.
-     * @param x - the input element in G1.
+     * @param x - an input element in G1.
      * @param y - the Zp element to multiply with.
      */
     void g1_mul(g1 r, g1 x, Zp y);
@@ -30,7 +30,7 @@ namespace asym {
     /**
      * Multiply an element in G2 with a Zp element.
      * @param r - the resulting element in G2.
-     * @param x - the input element in G2.
+     * @param x - an input element in G2.
      * @param y - the Zp element to multiply with.
      */
     void g2_mul(g2 r, g2 x, Zp y);
@@ -38,7 +38,7 @@ namespace asym {
     /**
      * Raise an element in Gt with a Zp element.
      * @param r - the resulting element in Gt.
-     * @param x - the input element in Gt.
+     * @param x - an input element in Gt.
      * @param y - the Zp element to raise to.
      */
     void gt_raise(gt r, gt x, Zp y);
@@ -46,8 +46,8 @@ namespace asym {
     /**
      * Compute the bilinear pairing of element g1 and g2.
      * @param r - the resulting element in Gt.
-     * @param x - the input element in G1.
-     * @param y - the input element in G2.
+     * @param x - an input element in G1.
+     * @param y - an input element in G2.
      */
     void bp_map(gt r, g1 x, g2 y);
 }
