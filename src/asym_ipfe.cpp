@@ -73,8 +73,8 @@ int asym::ipfe::dec(Pp pp, Key y, Ct x) {
     asym::inner_product(ct, y.ctl, x.ctr, B_SIZE);
 
     // Decrypt final result.
-    gt_inverse(ct, ct);
-    gt_multiply(xy, xy, ct);
+    asym::gt_inverse(ct, ct);
+    asym::gt_multiply(xy, xy, ct);
 
     // Get a target group element holder.
     asym::gt output;

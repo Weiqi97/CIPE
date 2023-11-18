@@ -62,3 +62,8 @@ add_test(NAME test_asym_ipfe COMMAND test_asym_ipfe)
 add_executable(test_asym_ipfe_kim test_asym_ipfe_kim.cpp)
 target_link_libraries(test_asym_ipfe_kim PRIVATE asym_fe_lib)
 add_test(NAME test_asym_ipfe_kim COMMAND test_asym_ipfe_kim)
+
+# -----------------------------------------------------
+add_executable(test_asym_ipfe_tao test_asym_ipfe_tao.cpp)
+target_link_libraries(test_asym_ipfe_tao PRIVATE asym_fe_lib)
+add_test(NAME test_asym_ipfe_tao COMMAND test_asym_ipfe_tao)
