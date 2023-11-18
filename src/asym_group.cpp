@@ -16,6 +16,10 @@ void asym::g2_mul(asym::g2 r, asym::g2 x, asym::Zp y) {
     g2_mul(r, x, y.num);
 }
 
+void asym::gt_get_unity(asym::gt x) {
+    gt_set_unity(x);
+}
+
 void asym::gt_raise(asym::gt r, asym::gt x, asym::Zp y) {
     gt_exp(r, x, y.num);
 }

@@ -29,7 +29,7 @@ int test_gt_all() {
 
     // Multiply them together and find x^0.
     asym::gt_multiply(y, y, z);
-    asym::gt_raise_int(x, x, 0);
+    asym::gt_get_unity(x);
 
     return asym::gt_compare(x, y);
 }

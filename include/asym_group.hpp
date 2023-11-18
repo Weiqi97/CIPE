@@ -36,6 +36,12 @@ namespace asym {
     void g2_mul(g2 r, g2 x, Zp y);
 
     /**
+     * Get the unity element in Gt.
+     * @param x - an input element in Gt.
+     */
+    void gt_get_unity(gt x);
+
+    /**
      * Raise an element in Gt with a Zp element.
      * @param r - the resulting element in Gt.
      * @param x - an input element in Gt.
