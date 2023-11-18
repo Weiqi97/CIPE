@@ -56,16 +56,16 @@ int sym::ipre::eval(Pp pp, Ct x, Ct y) {
     inner_product(ct, x.ctr, y.ctl, B_SIZE);
 
     // Decrypt final result.
-    gt_inv(ct, ct);
-    gt_mul(xy, xy, ct);
+    gt_inverse(ct, ct);
+    gt_multiply(xy, xy, ct);
 
     // Get a target group element holder.
     gt output;
 
     // Iterate through a loop to find correct answer.
     for (int i = 1; i <= pp.bound; i++) {
-        gt_exp_dig(output, pp.gt_base, i);
-        if (gt_cmp(output, xy) == RLC_EQ) return i;
+        gt_raise_int(output, pp.gt_base, i);
+        if (gt_compare(output, xy)) return i;
     }
 
     // Otherwise return 0 as the output.

@@ -30,7 +30,7 @@ asym::ipfe::kim::Key asym::ipfe::kim::keyGen(asym::ipfe::kim::Pp pp, asym::ipfe:
     // Compute g1^(a * y * B).
     zpVec yB = asym::matrix_multiply(y, sk.B, 1, pp.size, pp.size, pp.mod);
     zpVec ayB = asym::matrix_multiply_constant(yB, a, 1, pp.size);
-    key.ctx = asym::vector_raise_g1(pp.g1_base, ayB, pp.size);
+    key.ct = asym::vector_raise_g1(pp.g1_base, ayB, pp.size);
 
     return key;
 }
@@ -47,7 +47,7 @@ asym::ipfe::kim::Ct asym::ipfe::kim::enc(asym::ipfe::kim::Pp pp, asym::ipfe::kim
     // Compute g2^(bxBi).
     zpVec xBi = asym::matrix_multiply(x, sk.Bi, 1, pp.size, pp.size, pp.mod);
     zpVec bxBi = asym::matrix_multiply_constant(xBi, b, 1, pp.size);
-    ct.ctx = asym::vector_raise_g2(pp.g2_base, bxBi, pp.size);
+    ct.ct = asym::vector_raise_g2(pp.g2_base, bxBi, pp.size);
 
     return ct;
 }
@@ -55,7 +55,7 @@ asym::ipfe::kim::Ct asym::ipfe::kim::enc(asym::ipfe::kim::Pp pp, asym::ipfe::kim
 int asym::ipfe::kim::dec(asym::ipfe::kim::Pp pp, asym::ipfe::kim::Key y, asym::ipfe::kim::Ct x) {
     // Decrypt components.
     asym::gt xy, base;
-    asym::inner_product(xy, y.ctx, x.ctx, pp.size);
+    asym::inner_product(xy, y.ct, x.ct, pp.size);
     asym::bp_map(base, y.ctl, x.ctr);
 
     // Get a target group element holder.
@@ -63,8 +63,8 @@ int asym::ipfe::kim::dec(asym::ipfe::kim::Pp pp, asym::ipfe::kim::Key y, asym::i
 
     // Iterate through a loop to find correct answer.
     for (int i = 1; i <= pp.bound; i++) {
-        gt_exp_dig(output, base, i);
-        if (gt_cmp(output, xy) == RLC_EQ) return i;
+        asym::gt_raise_int(output, base, i);
+        if (asym::gt_compare(output, xy)) return i;
     }
 
     // Otherwise return 0 as the output.
