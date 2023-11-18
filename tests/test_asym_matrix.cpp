@@ -44,12 +44,12 @@ int test_multiply_vector(asym::point N) {
 }
 
 int test_multiply_constant(asym::point N) {
-    int mat_x[6] = {1, 2, 3, 4, 5, 6};
-    asym::zpMat x = asym::matrix_zp_from_int(mat_x, 1, 5, N);
     asym::Zp c = asym::zp_from_int(11, N);
 
+    int mat_x[6] = {1, 2, 3, 4, 5, 6};
+    asym::zpMat x = asym::matrix_zp_from_int(mat_x, 1, 6, N);
     asym::zpMat xy = asym::matrix_multiply_constant(x, c, 2, 3);
-    return asym::zp_cmp_int(xy[2], 33);
+    return asym::zp_cmp_int(xy[5], 66);
 }
 
 int test_inverse(asym::point N) {
