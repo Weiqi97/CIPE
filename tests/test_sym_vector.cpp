@@ -45,7 +45,7 @@ int test_inner_product(sym::point N) {
     sym::bp_map(b, base, base);
     sym::gt_raise(b, b, z);
 
-    return gt_cmp(b, r) == RLC_EQ;
+    return sym::gt_compare(b, r);
 }
 
 int main() {

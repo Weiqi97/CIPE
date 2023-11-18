@@ -21,6 +21,12 @@ namespace sym {
     void g_mul(g r, g x, Zp y);
 
     /**
+     * Get the unity element in Gt.
+     * @param x - an input element in Gt.
+     */
+    void gt_get_unity(gt x);
+
+    /**
      * Raise an element in Gt with a Zp element.
      * @param r - the resulting element in Gt.
      * @param x - an input element in Gt.

@@ -49,7 +49,7 @@ int test_inner_product(asym::point N) {
     asym::bp_map(b, g1_gen, g2_gen);
     asym::gt_raise(b, b, z);
 
-    return gt_cmp(b, r) == RLC_EQ;
+    return asym::gt_compare(b, r);
 }
 
 int main() {

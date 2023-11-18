@@ -8,6 +8,10 @@ void sym::g_mul(sym::g r, sym::g x, sym::Zp y) {
     g1_mul(r, x, y.num);
 }
 
+void sym::gt_get_unity(sym::gt x) {
+    gt_set_unity(x);
+}
+
 void sym::gt_raise(sym::gt r, sym::gt x, sym::Zp y) {
     gt_exp(r, x, y.num);
 }

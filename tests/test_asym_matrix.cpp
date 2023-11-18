@@ -65,7 +65,7 @@ int test_inverse_with_det(asym::point N) {
     int mat[9] = {3, 5, 8, 2, 2, 2, 9, 9, 3};
     asym::zpMat x = asym::matrix_zp_from_int(mat, size, size, N);
 
-    asym::Zp det;
+    asym::Zp det{};
     asym::matrix_inverse_with_det(x, det, size, N);
 
     return asym::zp_cmp_int(det, 24) == 1;

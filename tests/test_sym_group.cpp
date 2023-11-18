@@ -21,7 +21,7 @@ int test_gt_all() {
 
     // Multiply them together and find x^0.
     sym::gt_multiply(y, y, z);
-    sym::gt_raise_int(x, x, 0);
+    sym::gt_get_unity(x);
 
     return sym::gt_compare(x, y);
 }
