@@ -3,16 +3,32 @@
 #include "asym_ipfe.hpp"
 
 namespace asym::ipfe::kim {
-    // These would be the same as in the other IPFE scheme.
-    using Pp = asym::ipfe::Pp;
-    using Ct = asym::ipfe::Ct;
-    using Key = asym::ipfe::Key;
+    // Struct for the public parameters.
+    struct Pp {
+        int size;
+        int bound;
+        asym::g1 g1_base;
+        asym::g2 g2_base;
+        asym::point mod;
+    };
 
     // We define a new struct for the secret key to include determinant value.
     struct Sk {
         asym::Zp det;
-        asym::zpMat B;
-        asym::zpMat Bi;
+        asym::zpMat B{};
+        asym::zpMat Bi{};
+    };
+
+    // Struct for the derived functional key.
+    struct Key {
+        asym::g1Vec ctx;
+        asym::g1 ctl;
+    };
+
+    // Struct for the ciphertext.
+    struct Ct {
+        asym::g2Vec ctx;
+        asym::g2 ctr;
     };
 
     /**
@@ -21,7 +37,6 @@ namespace asym::ipfe::kim {
      *  - bound: inner product result bound.
      *  - g1_base: a generator in group G1.
      *  - g2_base: a generator in group G2.
-     *  - gt_base: the result of e(g_base, g_base).
      *  - mod: the size of the field.
      * @param size - message length.
      * @param bound - inner product result bound.

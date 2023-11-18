@@ -23,13 +23,13 @@ namespace asym::ipfe {
 
     // Struct for the derived functional key.
     struct Key {
-        asym::g1Vec ctx;
+        asym::g1Vec ct;
         asym::g1Vec ctl;
     };
 
     // Struct for the ciphertext.
     struct Ct {
-        asym::g2Vec ctx;
+        asym::g2Vec ct;
         asym::g2Vec ctr;
     };
 

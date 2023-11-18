@@ -57,3 +57,8 @@ add_test(NAME test_asym_matrix COMMAND test_asym_matrix)
 add_executable(test_asym_ipfe test_asym_ipfe.cpp)
 target_link_libraries(test_asym_ipfe PRIVATE asym_fe_lib)
 add_test(NAME test_asym_ipfe COMMAND test_asym_ipfe)
+
+# -----------------------------------------------------
+add_executable(test_asym_ipfe_kim test_asym_ipfe_kim.cpp)
+target_link_libraries(test_asym_ipfe_kim PRIVATE asym_fe_lib)
+add_test(NAME test_asym_ipfe_kim COMMAND test_asym_ipfe_kim)

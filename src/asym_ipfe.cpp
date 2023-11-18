@@ -31,7 +31,7 @@ asym::ipfe::Key asym::ipfe::keyGen(asym::ipfe::Pp pp, asym::ipfe::Sk sk, const i
     zpVec s = vector_zp_rand(2, pp.mod);
     zpVec sA = matrix_multiply(s, sk.A, 1, 2, pp.size, pp.mod);
     zpVec sAx = vector_add(sA, y, pp.size);
-    key.ctx = vector_raise_g1(pp.g1_base, sAx, pp.size);
+    key.ct = vector_raise_g1(pp.g1_base, sAx, pp.size);
 
     // We compute the function hiding inner product encryption derived key.
     zpMat AT = matrix_transpose(sk.A, 2, pp.size);
@@ -54,7 +54,7 @@ asym::ipfe::Ct asym::ipfe::enc(asym::ipfe::Pp pp, asym::ipfe::Sk sk, const int *
     zpVec s = vector_zp_rand(2, pp.mod);
     zpVec sA = matrix_multiply(s, sk.A, 1, 2, pp.size, pp.mod);
     zpVec sAx = vector_add(sA, x, pp.size);
-    ct.ctx = vector_raise_g2(pp.g2_base, sAx, pp.size);
+    ct.ct = vector_raise_g2(pp.g2_base, sAx, pp.size);
 
     // We compute the function hiding inner product encryption ciphertext.
     zpMat AT = matrix_transpose(sk.A, 2, pp.size);
@@ -69,7 +69,7 @@ asym::ipfe::Ct asym::ipfe::enc(asym::ipfe::Pp pp, asym::ipfe::Sk sk, const int *
 int asym::ipfe::dec(Pp pp, Key y, Ct x) {
     // Decrypt components.
     gt xy, ct;
-    inner_product(xy, y.ctx, x.ctx, pp.size);
+    inner_product(xy, y.ct, x.ct, pp.size);
     inner_product(ct, y.ctl, x.ctr, B_SIZE);
 
     // Decrypt final result.
