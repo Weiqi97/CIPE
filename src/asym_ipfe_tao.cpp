@@ -80,7 +80,7 @@ asym::ipfe::tao::Ct asym::ipfe::tao::enc(asym::ipfe::tao::Pp pp, asym::ipfe::tao
 int asym::ipfe::tao::dec(asym::ipfe::tao::Pp pp, asym::ipfe::tao::Key y, asym::ipfe::tao::Ct x) {
     // Decrypt components.
     asym::gt xy;
-    asym::inner_product(xy, y.ct, x.ct, pp.size);
+    asym::inner_product(xy, y.ct, x.ct, pp.b_size);
 
     // Get a target group element holder.
     asym::gt output;
