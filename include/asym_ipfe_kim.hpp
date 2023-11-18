@@ -1,36 +1,18 @@
 #pragma once
 
-#include "asym_vector.hpp"
-#include "asym_matrix.hpp"
+#include "asym_ipfe.hpp"
 
-namespace asym::ipfe {
-    // Struct for the public parameters.
-    struct Pp {
-        int size;
-        int bound;
-        asym::g1 g1_base;
-        asym::g2 g2_base;
-        asym::gt gt_base;
-        asym::point mod;
-    };
+namespace asym::ipfe::kim {
+    // These would be the same as in the other IPFE scheme.
+    using Pp = asym::ipfe::Pp;
+    using Ct = asym::ipfe::Ct;
+    using Key = asym::ipfe::Key;
 
-    // Struct for the secret key.
+    // We define a new struct for the secret key to include determinant value.
     struct Sk {
-        asym::zpMat A;
+        asym::Zp det;
         asym::zpMat B;
         asym::zpMat Bi;
-    };
-
-    // Struct for the derived functional key.
-    struct Key {
-        asym::g1Vec ctx;
-        asym::g1Vec ctl;
-    };
-
-    // Struct for the ciphertext.
-    struct Ct {
-        asym::g2Vec ctx;
-        asym::g2Vec ctr;
     };
 
     /**

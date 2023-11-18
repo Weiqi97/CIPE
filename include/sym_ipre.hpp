@@ -8,23 +8,23 @@ namespace sym::ipre {
     struct Pp {
         int size;
         int bound;
-        g g_base;
-        gt gt_base;
-        point mod;
+        sym::g g_base;
+        sym::gt gt_base;
+        sym::point mod;
     };
 
     // Struct for the secret key.
     struct Sk {
-        zpMat A;
-        zpMat B;
-        zpMat Bi;
+        sym::zpMat A;
+        sym::zpMat B;
+        sym::zpMat Bi;
     };
 
     // Struct for the ciphertext.
     struct Ct {
-        gVec ctx;
-        gVec ctk;
-        gVec ctc;
+        sym::gVec ctx;
+        sym::gVec ctl;
+        sym::gVec ctr;
     };
 
     /**

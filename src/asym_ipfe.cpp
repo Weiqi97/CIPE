@@ -40,7 +40,7 @@ asym::ipfe::Key asym::ipfe::keyGen(asym::ipfe::Pp pp, asym::ipfe::Sk sk, const i
     zpVec xATsAAT = vector_add(xAT, sAAT, 2);
     zpVec sxATsAAT = vector_join(s, xATsAAT, 2, 2);
     zpVec sxATsAATBi = matrix_multiply(sxATsAAT, sk.Bi, 1, B_SIZE, B_SIZE, pp.mod);
-    key.ctk = vector_raise_g1(pp.g1_base, sxATsAATBi, B_SIZE);
+    key.ctl = vector_raise_g1(pp.g1_base, sxATsAATBi, B_SIZE);
 
     return key;
 }
@@ -61,7 +61,7 @@ asym::ipfe::Ct asym::ipfe::enc(asym::ipfe::Pp pp, asym::ipfe::Sk sk, const int *
     zpVec xAT = matrix_multiply(x, AT, 1, pp.size, 2, pp.mod);
     zpVec xATs = vector_join(xAT, s, 2, 2);
     zpVec xATsB = matrix_multiply(xATs, sk.B, 1, B_SIZE, B_SIZE, pp.mod);
-    ct.ctc = vector_raise_g2(pp.g2_base, xATsB, B_SIZE);
+    ct.ctr = vector_raise_g2(pp.g2_base, xATsB, B_SIZE);
 
     return ct;
 }
@@ -70,7 +70,7 @@ int asym::ipfe::dec(Pp pp, Key y, Ct x) {
     // Decrypt components.
     gt xy, ct;
     inner_product(xy, y.ctx, x.ctx, pp.size);
-    inner_product(ct, y.ctk, x.ctc, B_SIZE);
+    inner_product(ct, y.ctl, x.ctr, B_SIZE);
 
     // Decrypt final result.
     gt_inv(ct, ct);

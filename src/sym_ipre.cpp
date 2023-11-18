@@ -37,14 +37,14 @@ sym::ipre::Ct sym::ipre::enc(Pp pp, Sk sk, const int *message) {
     zpVec xAT = matrix_multiply(x, AT, 1, pp.size, 2, pp.mod);
     zpVec xATs = vector_join(xAT, s, 2, 2);
     zpVec xATsB = matrix_multiply(xATs, sk.B, 1, B_SIZE, B_SIZE, pp.mod);
-    ct.ctc = vector_raise(pp.g_base, xATsB, B_SIZE);
+    ct.ctr = vector_raise(pp.g_base, xATsB, B_SIZE);
 
     // We compute the function hiding inner product encryption derived key.
     zpVec sAAT = matrix_multiply(sA, AT, 1, pp.size, 2, pp.mod);
     zpVec xATsAAT = vector_add(xAT, sAAT, 2);
     zpVec sxATsAAT = vector_join(s, xATsAAT, 2, 2);
     zpVec sxATsAATBi = matrix_multiply(sxATsAAT, sk.Bi, 1, B_SIZE, B_SIZE, pp.mod);
-    ct.ctk = vector_raise(pp.g_base, sxATsAATBi, B_SIZE);
+    ct.ctl = vector_raise(pp.g_base, sxATsAATBi, B_SIZE);
 
     return ct;
 }
@@ -53,7 +53,7 @@ int sym::ipre::eval(Pp pp, Ct x, Ct y) {
     // Decrypt components.
     gt xy, ct;
     inner_product(xy, x.ctx, y.ctx, pp.size);
-    inner_product(ct, x.ctc, y.ctk, B_SIZE);
+    inner_product(ct, x.ctr, y.ctl, B_SIZE);
 
     // Decrypt final result.
     gt_inv(ct, ct);
