@@ -15,8 +15,8 @@ namespace asym::ipfe::kim {
     // We define a new struct for the secret key to include determinant value.
     struct Sk {
         asym::Zp det;
-        asym::zpMat B{};
-        asym::zpMat Bi{};
+        asym::zpMat B;
+        asym::zpMat Bi;
     };
 
     // Struct for the derived functional key.

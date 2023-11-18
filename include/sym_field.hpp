@@ -4,8 +4,8 @@
 
 namespace sym {
     struct Zp {
-        point num{};
-        point mod{};
+        point num;
+        point mod;
     };
 
     /**

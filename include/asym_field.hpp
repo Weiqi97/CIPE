@@ -4,8 +4,8 @@
 
 namespace asym {
     struct Zp {
-        point num{};
-        point mod{};
+        point num;
+        point mod;
     };
 
     /**
