@@ -61,13 +61,13 @@ asym::ipfe::tao::Ct asym::ipfe::tao::enc(asym::ipfe::tao::Pp pp, asym::ipfe::tao
     int zero_list[pp.size];
     for (int i = 0; i < pp.size; ++i) { zero_list[i] = 0; }
 
-    // Merge zeros with y to get new y.
+    // Merge zeros with x to get new x.
     x = asym::vector_join(x, asym::vector_zp_from_int(zero_list, pp.size, pp.mod), pp.size, pp.size);
 
-    // Merge two zeros and then the random values.
-    x = asym::vector_join(x, zero_vec, pp.size * 2, 1);
-    x = asym::vector_join(x, zero_vec, pp.size * 2 + 1, 1);
-    x = asym::vector_join(x, rand_vec, pp.size * 2 + 2, 2);
+    // Merge the random values and three zeros.
+    x = asym::vector_join(x, rand_vec, pp.size * 2, 2);
+    x = asym::vector_join(x, zero_vec, pp.size * 2 + 2, 1);
+    x = asym::vector_join(x, zero_vec, pp.size * 2 + 3, 1);
     x = asym::vector_join(x, zero_vec, pp.size * 2 + 4, 1);
 
     // Compute g2^xBi.
