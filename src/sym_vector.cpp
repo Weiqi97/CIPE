@@ -32,10 +32,5 @@ sym::gVec sym::vector_raise(sym::g base, sym::zpVec x, int size) {
 }
 
 void sym::inner_product(sym::gt r, sym::gVec a, sym::gVec b, int size) {
-    sym::gt temp;
-    sym::gt_get_unity(r);
-    for (int i = 0; i < size; i++) {
-        sym::bp_map(temp, a[i], b[i]);
-        sym::gt_multiply(r, r, temp);
-    }
+    pc_map_sim(r, a, b, size);
 }

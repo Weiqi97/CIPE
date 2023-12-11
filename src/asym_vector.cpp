@@ -38,10 +38,5 @@ asym::g2Vec asym::vector_raise_g2(asym::g2 base, asym::zpVec x, int size) {
 }
 
 void asym::inner_product(asym::gt r, asym::g1Vec a, asym::g2Vec b, int size) {
-    asym::gt temp;
-    gt_get_unity(r);
-    for (int i = 0; i < size; i++) {
-        asym::bp_map(temp, a[i], b[i]);
-        asym::gt_multiply(r, r, temp);
-    }
+    pc_map_sim(r, a, b, size);
 }
