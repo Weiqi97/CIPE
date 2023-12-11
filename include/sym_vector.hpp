@@ -9,7 +9,7 @@ namespace sym {
 
     /**
      * Build a pre-computation table for faster multiplication in G.
-     * @param base - an element in g.
+     * @param base - an element in G.
      * @return a vector of pre computed elements.
      */
     gVec get_g_pre_table(g base);
