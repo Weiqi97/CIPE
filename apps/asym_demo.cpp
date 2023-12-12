@@ -13,7 +13,7 @@ int main() {
     std::uniform_int_distribution<int> distribution(1, 300);
 
     // Set dimensions holders and get the data.
-    int data_dim = 128, data_size = 12000;
+    int data_dim = 128, data_size = 10000;
 
     // Generate some dummy data.
     std::vector<std::vector<int>> vectors(data_size, std::vector<int>(data_dim));
