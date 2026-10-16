@@ -55,6 +55,7 @@ namespace IPFE::KKS{
 
     template <class C>
     [[nodiscard]] Msk<C> setup(const std::size_t size){
+        IPFE::detail::require_dimension(size);
         const auto eta = rbp::Zp<C>::random();
         const auto eta_bar = rbp::Zp<C>::random();
         auto s = rbp::random_vector<C>(size);

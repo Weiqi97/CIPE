@@ -62,6 +62,7 @@ namespace QFE::SGP{
 
     template <class C>
     [[nodiscard]] Keys<C> setup(const std::size_t size){
+        QFE::detail::require_dimension(size);
         auto s = rbp::random_vector<C>(size);
         auto t = rbp::random_vector<C>(size);
         return {{rbp::G1<C>::mul_generator(s), rbp::G2<C>::mul_generator(t)}, {std::move(s), std::move(t)}};

@@ -58,6 +58,7 @@ namespace QFE::BCFG{
 
     template <class C>
     [[nodiscard]] Keys<C> setup(const std::size_t size){
+        QFE::detail::require_dimension(size);
         const auto w = rbp::Zp<C>::random();
         auto a = rbp::random_vector<C>(size);
         auto b = rbp::random_vector<C>(size);

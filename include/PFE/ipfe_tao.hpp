@@ -32,6 +32,7 @@ namespace IPFE::TAO{
 
     template <class C>
     [[nodiscard]] Msk<C> setup(const std::size_t size){
+        IPFE::detail::require_dimension(size);
         const auto r = rbp::Zp<C>::random();
         auto b = rbp::Matrix<C>::random(2 * size + 5, 2 * size + 5);
         auto bi = (b.inverse() * r).transpose();

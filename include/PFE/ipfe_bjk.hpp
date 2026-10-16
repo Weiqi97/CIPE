@@ -36,6 +36,7 @@ namespace IPFE::BJK{
 
     template <class C>
     [[nodiscard]] Msk<C> setup(const std::size_t size){
+        IPFE::detail::require_dimension(size);
         auto b = rbp::Matrix<C>::random(2 * size + 4, 2 * size + 4);
         auto bi = b.inverse().transpose();
         auto d = rbp::Matrix<C>::random(2, 2);

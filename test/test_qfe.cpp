@@ -43,6 +43,25 @@ TYPED_TEST(QuadraticTest, HandlesVectorsOfLengthOne){
     EXPECT_EQ(decrypt(keygen(keys.msk, IntMat{{-3}}), enc(keys.pk, IntVec{7}, IntVec{2})), -42);
 }
 
+TYPED_TEST(QuadraticTest, RejectsDimensionsBelowOne){
+    EXPECT_THROW((void)TypeParam::setup(0), rbp::ShapeError);
+}
+
+TYPED_TEST(QuadraticTest, RejectsCiphertextsMissingAPoint){
+    const auto keys = TypeParam::setup(3);
+    const auto decrypt = TypeParam::decryptor(keys, -100, 100);
+    const auto sk = keygen(keys.msk, IntMat{{1, 0, 2}, {0, -1, 0}, {3, 1, 1}});
+    auto ct = enc(keys.pk, IntVec{1, -2, 3}, IntVec{4, 5, -6});
+    auto& bilinear_g2 = [](auto& c) -> auto&{
+        if constexpr (requires{ c.d; }) return c.d;
+        else return c.b0;
+    }(ct);
+    bilinear_g2.pop_back();
+
+    EXPECT_THROW((void)decrypt(sk, ct), rbp::ShapeError);
+    EXPECT_THROW((void)decrypt(prepare(sk), ct), rbp::ShapeError);
+}
+
 TYPED_TEST(QuadraticTest, RejectsInputsOfTheWrongShape){
     const auto keys = TypeParam::setup(3);
 

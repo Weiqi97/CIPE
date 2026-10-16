@@ -35,6 +35,7 @@ namespace IPFE::KIM{
 
     template <class C>
     [[nodiscard]] Msk<C> setup(const std::size_t size){
+        IPFE::detail::require_dimension(size);
         auto b = rbp::Matrix<C>::random(size, size);
         auto [inverse, det] = b.inverse_with_determinant();
         return {det, std::move(b), (inverse * det).transpose()};

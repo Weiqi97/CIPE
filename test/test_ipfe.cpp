@@ -41,6 +41,10 @@ TYPED_TEST(InnerProductTest, HandlesVectorsOfLengthOne){
     EXPECT_EQ(decrypt(keygen(msk, IntVec{-3}), enc(msk, IntVec{7})), -21);
 }
 
+TYPED_TEST(InnerProductTest, RejectsDimensionsBelowOne){
+    EXPECT_THROW((void)TypeParam::setup(0), rbp::ShapeError);
+}
+
 TYPED_TEST(InnerProductTest, RejectsVectorsOfTheWrongLength){
     const auto msk = TypeParam::setup(4);
 

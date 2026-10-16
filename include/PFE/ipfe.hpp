@@ -2,6 +2,7 @@
 #define PFE_IPFE_HPP
 
 #include <concepts>
+#include <cstddef>
 #include <cstdint>
 #include <vector>
 #include <rbp/rbp.hpp>
@@ -17,6 +18,10 @@ namespace IPFE{
     namespace detail{
         template <class T, class... Ts>
         concept OneOf = (std::same_as<T, Ts> || ...);
+
+        inline void require_dimension(const std::size_t size){
+            if (size == 0) throw rbp::ShapeError("setup needs a dimension of at least 1");
+        }
 
         template <class C, rbp::Side S>
         [[nodiscard]] std::vector<rbp::Point<C, S>> negated(std::vector<rbp::Point<C, S>> points){

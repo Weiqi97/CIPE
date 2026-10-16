@@ -31,6 +31,7 @@ namespace QFE{
 
         using IPFE::detail::negated;
         using IPFE::detail::OneOf;
+        using IPFE::detail::require_dimension;
 
         template <class C>
         void add_bilinear(

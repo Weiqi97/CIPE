@@ -31,6 +31,7 @@ namespace IPFE::LIN{
 
     template <class C>
     [[nodiscard]] Msk<C> setup(const std::size_t size){
+        IPFE::detail::require_dimension(size);
         return {rbp::random_vector<C>(2 * size), rbp::random_vector<C>(2 * size + 1)};
     }
 

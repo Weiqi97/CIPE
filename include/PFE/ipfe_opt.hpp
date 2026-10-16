@@ -48,6 +48,7 @@ namespace IPFE::OPT{
 
     template <class C>
     [[nodiscard]] Msk<C> setup(const std::size_t size){
+        IPFE::detail::require_dimension(size);
         auto b = rbp::Matrix<C>::random(b_size, b_size);
         auto bi = b.inverse().transpose();
         return {rbp::Matrix<C>::random(2, size), std::move(b), std::move(bi)};
