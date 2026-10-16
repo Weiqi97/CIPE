@@ -12,14 +12,18 @@ TYPED_TEST(QuadraticTest, DecryptsQuadraticFormsExactlyWithinTheRange){
     const auto keys = TypeParam::setup(3);
     const auto decrypt = TypeParam::decryptor(keys, -100, 100);
     const auto sk = keygen(keys.msk, IntMat{{1, 0, 2}, {0, -1, 0}, {3, 1, 1}});
+    const auto prepared = prepare(sk);
+    const std::vector<std::tuple<IntVec, IntVec, std::optional<std::int64_t>>> cases{
+        {{1, -2, 3}, {4, 5, -6}, 35}, {{-1, 1, 0}, {2, 0, 1}, -4}, {{0, 0, 0}, {4, 5, -6}, 0},
+        {{1, 0, 0}, {100, 0, 0}, 100}, {{0, 1, 0}, {0, 100, 0}, -100}, {{1, 0, 0}, {101, 0, 0}, std::nullopt},
+        {{0, 1, 0}, {0, 101, 0}, std::nullopt}
+    };
 
-    EXPECT_EQ(decrypt(sk, enc(keys.pk, IntVec{1, -2, 3}, IntVec{4, 5, -6})), 35);
-    EXPECT_EQ(decrypt(sk, enc(keys.pk, IntVec{-1, 1, 0}, IntVec{2, 0, 1})), -4);
-    EXPECT_EQ(decrypt(sk, enc(keys.pk, IntVec{0, 0, 0}, IntVec{4, 5, -6})), 0);
-    EXPECT_EQ(decrypt(sk, enc(keys.pk, IntVec{1, 0, 0}, IntVec{100, 0, 0})), 100);
-    EXPECT_EQ(decrypt(sk, enc(keys.pk, IntVec{0, 1, 0}, IntVec{0, 100, 0})), -100);
-    EXPECT_EQ(decrypt(sk, enc(keys.pk, IntVec{1, 0, 0}, IntVec{101, 0, 0})), std::nullopt);
-    EXPECT_EQ(decrypt(sk, enc(keys.pk, IntVec{0, 1, 0}, IntVec{0, 101, 0})), std::nullopt);
+    for (const auto& [left, right, expected] : cases){
+        const auto ct = enc(keys.pk, left, right);
+        EXPECT_EQ(decrypt(sk, ct), expected);
+        EXPECT_EQ(decrypt(prepared, ct), expected);
+    }
 }
 
 TYPED_TEST(QuadraticTest, DecryptsOneCiphertextUnderManyKeys){
@@ -30,15 +34,6 @@ TYPED_TEST(QuadraticTest, DecryptsOneCiphertextUnderManyKeys){
     EXPECT_EQ(decrypt(keygen(keys.msk, IntMat{{1, 0, 2}, {0, -1, 0}, {3, 1, 1}}), ct), 35);
     EXPECT_EQ(decrypt(keygen(keys.msk, IntMat{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}), ct), -24);
     EXPECT_EQ(decrypt(keygen(keys.msk, IntMat{{0, 0, 0}, {0, 0, 0}, {0, 0, 1}}), ct), -18);
-}
-
-TYPED_TEST(QuadraticTest, PreparedKeyDecryptsEveryCiphertextLikeTheKey){
-    const auto keys = TypeParam::setup(3);
-    const auto decrypt = TypeParam::decryptor(keys, -100, 100);
-    const auto prepared = prepare(keygen(keys.msk, IntMat{{1, 0, 2}, {0, -1, 0}, {3, 1, 1}}));
-
-    EXPECT_EQ(decrypt(prepared, enc(keys.pk, IntVec{1, -2, 3}, IntVec{4, 5, -6})), 35);
-    EXPECT_EQ(decrypt(prepared, enc(keys.pk, IntVec{-1, 1, 0}, IntVec{2, 0, 1})), -4);
 }
 
 TYPED_TEST(QuadraticTest, HandlesVectorsOfLengthOne){

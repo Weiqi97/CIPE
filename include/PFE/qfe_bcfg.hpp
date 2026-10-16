@@ -56,21 +56,6 @@ namespace QFE::BCFG{
         rbp::G2<C> e_hat;
     };
 
-    namespace detail{
-        template <class C, class Key>
-        [[nodiscard]] std::optional<std::int64_t> decrypt(
-            const rbp::DlogTable<C>& table, const Key& sk, const Ct<C>& ct
-        ){
-            rbp::PairingProduct<C> product;
-            QFE::detail::add_bilinear(product, ct.c, sk.f, ct.d);
-            product.add(QFE::detail::negated(sk.af), ct.d_hat);
-            product.add(QFE::detail::negated(ct.c_hat), sk.fb);
-            product.add(-sk.s1, ct.e);
-            product.add(sk.s2, ct.e_hat);
-            return table.find(product.evaluate());
-        }
-    }
-
     template <class C>
     [[nodiscard]] Keys<C> setup(const std::size_t size){
         const auto w = rbp::Zp<C>::random();
@@ -124,16 +109,15 @@ namespace QFE::BCFG{
         return {sk.f, sk.s1, sk.s2, sk.af, rbp::PreparedG2<C>(sk.fb)};
     }
 
-    template <class C>
-    [[nodiscard]] std::optional<std::int64_t> dec(const rbp::DlogTable<C>& table, const Sk<C>& sk, const Ct<C>& ct){
-        return detail::decrypt(table, sk, ct);
-    }
-
-    template <class C>
-    [[nodiscard]] std::optional<std::int64_t> dec(
-        const rbp::DlogTable<C>& table, const PreparedSk<C>& sk, const Ct<C>& ct
-    ){
-        return detail::decrypt(table, sk, ct);
+    template <class C, QFE::detail::OneOf<Sk<C>, PreparedSk<C>> Key>
+    [[nodiscard]] std::optional<std::int64_t> dec(const rbp::DlogTable<C>& table, const Key& sk, const Ct<C>& ct){
+        rbp::PairingProduct<C> product;
+        QFE::detail::add_bilinear(product, ct.c, sk.f, ct.d);
+        product.add(QFE::detail::negated(sk.af), ct.d_hat);
+        product.add(QFE::detail::negated(ct.c_hat), sk.fb);
+        product.add(-sk.s1, ct.e);
+        product.add(sk.s2, ct.e_hat);
+        return table.find(product.evaluate());
     }
 }
 

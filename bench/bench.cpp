@@ -181,11 +181,6 @@ namespace{
             "\nOne discrete-log table for [0, {}] takes {:.2f} ms to build.\n", settings.bound, table_ms
         );
     }
-
-    template <class... Curves>
-    void benchmark_every_curve(const Settings& settings){
-        (benchmark<Curves>(settings), ...);
-    }
 }
 
 int main(const int argc, char** argv){
@@ -196,6 +191,9 @@ int main(const int argc, char** argv){
     const auto threads = std::max(1u, std::thread::hardware_concurrency());
 
     for (const auto length : lengths){
-        benchmark_every_curve<rbp::BLS12_381, rbp::BN254, rbp::SS1536>({runs, length, 10000, threads});
+        const Settings settings{runs, length, 10000, threads};
+        benchmark<rbp::BLS12_381>(settings);
+        benchmark<rbp::BN254>(settings);
+        benchmark<rbp::SS1536>(settings);
     }
 }

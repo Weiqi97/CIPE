@@ -59,15 +59,8 @@ namespace IPFE::TAO{
         return {rbp::PreparedG2<C>(sk.vec)};
     }
 
-    template <class C>
-    [[nodiscard]] std::optional<std::int64_t> dec(const rbp::DlogTable<C>& table, const Sk<C>& sk, const Ct<C>& ct){
-        return table.find(rbp::pair(ct.vec, sk.vec));
-    }
-
-    template <class C>
-    [[nodiscard]] std::optional<std::int64_t> dec(
-        const rbp::DlogTable<C>& table, const PreparedSk<C>& sk, const Ct<C>& ct
-    ){
+    template <class C, IPFE::detail::OneOf<Sk<C>, PreparedSk<C>> Key>
+    [[nodiscard]] std::optional<std::int64_t> dec(const rbp::DlogTable<C>& table, const Key& sk, const Ct<C>& ct){
         return table.find(rbp::pair(ct.vec, sk.vec));
     }
 }

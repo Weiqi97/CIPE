@@ -1,6 +1,7 @@
 #ifndef PFE_IPFE_HPP
 #define PFE_IPFE_HPP
 
+#include <concepts>
 #include <cstdint>
 #include <vector>
 #include <rbp/rbp.hpp>
@@ -14,6 +15,9 @@ namespace IPFE{
     }
 
     namespace detail{
+        template <class T, class... Ts>
+        concept OneOf = (std::same_as<T, Ts> || ...);
+
         template <class C, rbp::Side S>
         [[nodiscard]] std::vector<rbp::Point<C, S>> negated(std::vector<rbp::Point<C, S>> points){
             for (auto& point : points) point = -point;

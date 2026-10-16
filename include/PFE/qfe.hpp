@@ -30,6 +30,7 @@ namespace QFE{
         }
 
         using IPFE::detail::negated;
+        using IPFE::detail::OneOf;
 
         template <class C>
         void add_bilinear(

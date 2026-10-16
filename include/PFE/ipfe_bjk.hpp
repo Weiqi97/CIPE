@@ -72,16 +72,9 @@ namespace IPFE::BJK{
         return {rbp::PreparedG2<C>(sk.r), rbp::PreparedG2<C>(sk.vec)};
     }
 
-    template <class C>
+    template <class C, IPFE::detail::OneOf<Sk<C>, PreparedSk<C>> Key>
     [[nodiscard]] std::optional<std::int64_t> dec(
-        const Sk<C>& sk, const Ct<C>& ct, const std::int64_t lower_bound, const std::int64_t upper_bound
-    ){
-        return rbp::dlog(rbp::pair(ct.r, sk.r), rbp::pair(ct.vec, sk.vec), lower_bound, upper_bound);
-    }
-
-    template <class C>
-    [[nodiscard]] std::optional<std::int64_t> dec(
-        const PreparedSk<C>& sk, const Ct<C>& ct, const std::int64_t lower_bound, const std::int64_t upper_bound
+        const Key& sk, const Ct<C>& ct, const std::int64_t lower_bound, const std::int64_t upper_bound
     ){
         return rbp::dlog(rbp::pair(ct.r, sk.r), rbp::pair(ct.vec, sk.vec), lower_bound, upper_bound);
     }
