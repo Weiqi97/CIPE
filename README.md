@@ -34,7 +34,7 @@ the quadratic schemes public-key, and all rely on bilinear pairings, hence pairi
 
 - **Eight schemes from the literature**, each one header under 150 lines that reads like the paper, with one shared
   test suite run against every scheme on three curves.
-- **Fast decryption.** A key can be prepared once so its pairing work is precomputed. With Ojaswi et al.'s scheme on
+- **Fast decryption.** A key can be prepared once so its pairing work is precomputed. With Acharya et al.'s scheme on
   BLS12-381, a prepared key decrypts a length-10 inner product in about 2 ms, and 16 threads sharing one key reach
   about 3,400 decryptions per second.
 - **Thread-safe by construction.** Keys and lookup tables never change after they are built, and a concurrency test
@@ -55,7 +55,7 @@ Inner-product FE, where a key for y decrypts a ciphertext of x to ⟨x, y⟩:
 | Kim et al. | `PFE/ipfe_kim.hpp` | full | generic group model | [SCN 2018](https://doi.org/10.1007/978-3-319-98113-0_29) |
 | Lin | `PFE/ipfe_lin.hpp` | full | SXDH | [CRYPTO 2017](https://doi.org/10.1007/978-3-319-63688-7_20) |
 | Kim, Kim and Seo | `PFE/ipfe_kks.hpp` | full | SXDH | [TCS 2019](https://doi.org/10.1016/j.tcs.2019.03.016) |
-| Ojaswi et al. | `PFE/ipfe_opt.hpp` | full | generic group model | [CiC 2025](https://doi.org/10.62056/abe0zo-3y) |
+| Acharya et al. | `PFE/ipfe_opt.hpp` | full | generic group model | [CiC 2025](https://doi.org/10.62056/abe0zo-3y) |
 
 Quadratic FE, where a key for a matrix F decrypts a ciphertext of (x, y) to xᵀFy and anyone with the public key can
 encrypt:
@@ -63,7 +63,7 @@ encrypt:
 | Scheme | Header | Security | Paper |
 | --- | --- | --- | --- |
 | Baltico et al. | `PFE/qfe_bcfg.hpp` | adaptive, generic group model | [CRYPTO 2017](https://doi.org/10.1007/978-3-319-63688-7_3) |
-| Dufour-Sans et al. | `PFE/qfe_sgp.hpp` | generic group model | [NeurIPS 2019](https://proceedings.neurips.cc/paper_files/paper/2019/hash/9d28de8ff9bb6a3fa41fddfdc28f3bc1-Abstract.html) |
+| Ryffel et al. | `PFE/qfe_sgp.hpp` | generic group model | [NeurIPS 2019](https://proceedings.neurips.cc/paper_files/paper/2019/hash/9d28de8ff9bb6a3fa41fddfdc28f3bc1-Abstract.html) |
 
 Every scheme has `setup`, `keygen`, `enc`, `prepare` and `dec`. `dec` returns `std::nullopt` when the result falls
 outside the searched range. Bishop et al. and Kim et al. take the range directly; the others share one

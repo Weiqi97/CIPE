@@ -69,7 +69,7 @@ struct Kks{
 
 template <class C>
 struct Opt{
-    static constexpr std::string_view name = "Ojaswi et al.";
+    static constexpr std::string_view name = "Acharya et al.";
     static auto setup(const std::size_t n){ return IPFE::OPT::setup<C>(n); }
     static auto decryptor(const IPFE::OPT::Msk<C>&, const std::int64_t lo, const std::int64_t hi){
         return table_decryptor<C>(IPFE::OPT::base<C>(), lo, hi);
@@ -87,7 +87,7 @@ struct Bcfg{
 
 template <class C>
 struct Sgp{
-    static constexpr std::string_view name = "Dufour-Sans et al.";
+    static constexpr std::string_view name = "Ryffel et al.";
     static auto setup(const std::size_t n){ return QFE::SGP::setup<C>(n); }
     static auto decryptor(const QFE::SGP::Keys<C>&, const std::int64_t lo, const std::int64_t hi){
         return table_decryptor<C>(QFE::SGP::base<C>(), lo, hi);
